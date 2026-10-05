@@ -1,39 +1,21 @@
 import { cn } from "@/lib/utils";
 
-interface LogoProps {
-  className?: string;
-  variant?: "default" | "cream" | "dark";
-}
-
-export function Logo({ className, variant = "default" }: LogoProps) {
-  // Adaptamos el color del texto si alguna vez lo usas en fondos claros
-  const textColor = variant === "dark" ? "text-ink" : "text-cream-paper";
-
+export function Logo({ variant = "default" }: { variant?: "default" | "cream" }) {
   return (
-    <div className={cn("group flex items-center gap-3", className)}>
-      {/* Símbolo (Monograma D) */}
-      <div className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-clay/40 bg-ink-2 shadow-[0_0_15px_rgba(0,229,255,0.25)] transition-all duration-300 group-hover:border-clay group-hover:shadow-[0_0_25px_rgba(0,229,255,0.5)]">
-        <div className="absolute inset-0 rounded-lg bg-clay/10" />
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          className="relative z-10 h-4 w-4 text-clay"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M7 4v16" />
-          <path d="M7 4h5a8 8 0 0 1 0 16H7" />
-        </svg>
+    <div className="flex items-center gap-2 group cursor-pointer">
+      <div className="relative grid h-8 w-8 place-items-center rounded-lg bg-primary shadow-[0_4px_10px_rgba(0,71,255,0.3)] transition-transform duration-300 group-hover:scale-105">
+        <span className="font-sans text-lg font-black text-white">N</span>
+        {/* Punto Lima Ácido animado */}
+        <div className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-accent border-2 border-white animate-pulse" />
       </div>
-
-      {/* Texto de la marca */}
-      <div className="flex flex-col">
-        <span className={cn("font-mono text-xl font-bold tracking-[0.15em] transition-colors group-hover:text-clay", textColor)}>
-          devion
-        </span>
-      </div>
+      <span
+        className={cn(
+          "font-sans text-xl font-black tracking-tighter transition-colors",
+          variant === "cream" ? "text-white" : "text-dark"
+        )}
+      >
+        Nexium<span className="text-primary">Lab</span>
+      </span>
     </div>
   );
 }
