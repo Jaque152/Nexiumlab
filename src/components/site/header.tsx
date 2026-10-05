@@ -6,12 +6,7 @@ import { useEffect, useState } from "react";
 import { Menu, ShoppingBag } from "lucide-react";
 import { Logo } from "./logo";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useCart } from "@/lib/cart-context";
 import { useLanguage } from "@/lib/language-context";
 import { cn } from "@/lib/utils";
@@ -24,29 +19,26 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* nav */}
-      <div
-        className={cn(
-          "transition-all duration-300",
-          scrolled
-            ? "border-b border-clay/20 bg-ink/85 backdrop-blur-md shadow-sm"
-            : "border-b border-transparent bg-ink/40 backdrop-blur-sm"
-        )}
-      >
-        <div className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between gap-6 container-px">
-          <Link href="/" aria-label="Devion inicio">
-            <Logo />
+    <header className={cn("fixed top-0 w-full z-50 transition-all duration-500", scrolled ? "py-2" : "py-4")}>
+      <div className="mx-auto max-w-[1400px] container-px">
+        <div
+          className={cn(
+            "flex h-[70px] items-center justify-between gap-6 px-6 rounded-2xl transition-all duration-500",
+            scrolled ? "glass-panel" : "bg-transparent"
+          )}
+        >
+          <Link href="/" aria-label="NexiumLab inicio">
+            <Logo variant="default" />
           </Link>
 
-          <nav className="hidden items-center gap-9 md:flex">
+          <nav className="hidden items-center gap-8 md:flex bg-white/50 px-6 py-2 rounded-full border border-black/5 backdrop-blur-md">
             {t.header.nav.map((l: { href: string; label: string }) => {
               const active = pathname === l.href;
               return (
@@ -54,8 +46,8 @@ export function Header() {
                   key={l.href}
                   href={l.href}
                   className={cn(
-                    "link-underline font-mono text-[0.72rem] uppercase tracking-[0.16em] font-semibold transition-colors",
-                    active ? "text-clay" : "text-cream-paper/70 hover:text-clay"
+                    "text-sm font-bold uppercase tracking-wider transition-all hover:-translate-y-0.5",
+                    active ? "text-primary" : "text-dark/70 hover:text-primary"
                   )}
                 >
                   {l.label}
@@ -64,98 +56,45 @@ export function Header() {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
-            {/* Selector de Idioma ES | EN */}
-            <div className="flex items-center rounded-md border border-clay/20 bg-ink-2 p-0.5 font-mono text-[0.68rem] font-bold tracking-wider">
-              <button
-                type="button"
-                onClick={() => setLang("es")}
-                className={cn(
-                  "rounded-sm px-2.5 py-1 transition-all",
-                  lang === "es"
-                    ? "bg-clay text-ink shadow-[0_0_10px_rgba(0,229,255,0.3)]"
-                    : "text-clay/60 hover:text-clay"
-                )}
-              >
-                ES
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                className={cn(
-                  "rounded-sm px-2.5 py-1 transition-all",
-                  lang === "en"
-                    ? "bg-clay text-ink shadow-[0_0_10px_rgba(0,229,255,0.3)]"
-                    : "text-clay/60 hover:text-clay"
-                )}
-              >
-                EN
-              </button>
+          <div className="flex items-center gap-4">
+            <div className="flex bg-white rounded-lg p-1 border border-black/5 shadow-sm">
+              <button onClick={() => setLang("es")} className={cn("px-2 py-1 text-xs font-bold rounded-md transition-all", lang === "es" ? "bg-primary text-white" : "text-dark/50")}>ES</button>
+              <button onClick={() => setLang("en")} className={cn("px-2 py-1 text-xs font-bold rounded-md transition-all", lang === "en" ? "bg-primary text-white" : "text-dark/50")}>EN</button>
             </div>
 
-            <Button asChild size="sm" className="hidden sm:inline-flex bg-clay text-ink hover:bg-cream-paper font-bold shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+            {/* CTA en color Lima Ácido para máxima conversión */}
+            <Button asChild size="sm" className="hidden sm:inline-flex bg-accent text-dark font-black hover:bg-primary hover:text-white border-0 shadow-lg transition-all hover:scale-105 rounded-full px-6">
               <Link href="/contacto">{t.header.cta}</Link>
             </Button>
 
-            <button
-              type="button"
-              onClick={toggle}
-              aria-label={t.header.cartAria}
-              className="relative grid h-10 w-10 place-items-center rounded-md border border-clay/20 bg-ink-2 text-clay transition-all hover:border-clay hover:shadow-[0_0_15px_rgba(0,229,255,0.2)]"
-            >
-              <ShoppingBag className="h-[18px] w-[18px]" />
+            <button onClick={toggle} className="relative p-2 rounded-full bg-white border border-black/5 hover:bg-light transition-colors shadow-sm">
+              <ShoppingBag className="h-5 w-5 text-dark" />
               {hydrated && count > 0 && (
-                <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-ochre px-1 font-mono text-[0.62rem] font-bold text-white shadow-[0_0_10px_rgba(176,38,255,0.4)]">
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
                   {count}
                 </span>
               )}
             </button>
 
-            {/* mobile menu */}
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
-                <button
-                  type="button"
-                  aria-label={t.header.menuAria}
-                  className="grid h-10 w-10 place-items-center rounded-md border border-clay/20 bg-ink-2 text-clay transition-colors hover:border-clay md:hidden"
-                >
-                  <Menu className="h-[18px] w-[18px]" />
-                </button>
+                <button className="p-2 md:hidden text-dark"><Menu className="h-6 w-6" /></button>
               </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="ink-panel w-full border-l border-clay/20 p-0 text-cream-paper sm:max-w-sm [&>button]:text-cream-paper/70"
-              >
-                <div className="flex h-full flex-col bg-ink">
-                  <div className="border-b border-clay/20 px-7 py-6">
-                    <Logo variant="cream" />
-                  </div>
-                  <nav className="flex flex-1 flex-col justify-center gap-1 px-7">
-                    {t.header.nav.map((l: { href: string; label: string }, i: number) => (
+              <SheetContent side="right" className="bg-light w-full border-l border-black/10 p-0 text-dark">
+                <div className="flex h-full flex-col p-6">
+                  <Logo variant="default" />
+                  <nav className="flex flex-1 flex-col justify-center gap-4 mt-10">
+                    {t.header.nav.map((l: { href: string; label: string }) => (
                       <SheetClose asChild key={l.href}>
-                        <Link
-                          href={l.href}
-                          className="group flex items-center gap-4 border-b border-clay/10 py-5"
-                        >
-                          <span className="font-mono text-xs font-bold text-clay">
-                            0{i + 1}
-                          </span>
-                          <span className="display text-3xl font-bold text-cream-paper transition-colors group-hover:text-clay">
-                            {l.label}
-                          </span>
+                        <Link href={l.href} className="text-3xl font-display font-bold hover:text-primary transition-colors border-b border-black/5 pb-4">
+                          {l.label}
                         </Link>
                       </SheetClose>
                     ))}
                   </nav>
-                  <div className="px-7 py-7 bg-ink-2 border-t border-clay/20">
-                    <SheetClose asChild>
-                      <Button asChild size="lg" className="w-full bg-clay text-ink font-bold hover:bg-cream-paper">
-                        <Link href="/contacto">{t.header.cta}</Link>
-                      </Button>
-                    </SheetClose>
-                    <p className="mt-5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-cream-paper/40">
-                      {t.header.contactEmail}
-                    </p>
+                  <div className="mt-auto">
+                    <Button asChild className="w-full bg-accent text-dark font-black hover:bg-primary hover:text-white rounded-full"><Link href="/contacto">{t.header.cta}</Link></Button>
+                    <p className="mt-4 text-center text-xs text-dark/50">consulta@nexiumlab.com.mx</p>
                   </div>
                 </div>
               </SheetContent>
