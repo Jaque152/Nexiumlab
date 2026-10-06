@@ -1,75 +1,94 @@
 "use client";
 
-import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { ContactForm } from "./contact-form";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/language-context";
 
 export function ContactoClient() {
   const { t } = useLanguage();
 
   const DETAILS = [
-    { icon: Phone, label: t.contactPage.detailsLabelPhone, value: "+52 55 9826 1186", href: "tel:+525598261186" },
-    { icon: Mail, label: t.contactPage.detailsLabelEmail, value: "consulta@nexiumlab.com.mx", href: "mailto:consulta@nexiumlab.com.mx" },
+    {
+      icon: Phone,
+      label: t.contactPage.detailsLabelPhone,
+      value: "+52 55 9826 1186",
+      href: "tel:+525598261186",
+    },
+    {
+      icon: Mail,
+      label: t.contactPage.detailsLabelEmail,
+      value: "hola@devion.com.mx",
+      href: "mailto:hola@devion.com.mx",
+    },
     {
       icon: MapPin,
       label: t.contactPage.detailsLabelAddress,
-      value: "CDMX, México",
+      value:
+        "Boulevard Adolfo López Mateos 2165, Interior 607A Oficina 607A-B Piso 6, Colonia Los Alpes, Alcaldía Álvaro Obregón, C.P. 01010, Ciudad de México",
       href: "#",
     },
   ];
 
   return (
-    <section className="relative bg-slate-50 min-h-screen pb-24">
-      {/* Fondo de luz estilo SaaS */}
-      <div className="absolute inset-x-0 top-0 h-[500px] bg-gradient-to-b from-indigo-100/50 to-transparent pointer-events-none" />
-      <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3">
-        <div className="w-[600px] h-[600px] rounded-full bg-blue-100/40 blur-3xl" />
+    <section className="relative isolate min-h-screen overflow-hidden bg-ink">
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#00E5FF08_1px,transparent_1px),linear-gradient(to_bottom,#00E5FF08_1px,transparent_1px)] bg-[size:40px_40px]" />
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="absolute -left-32 top-[-10%] h-[460px] w-[460px] rounded-full bg-clay/10 blur-[120px]" />
+        <div className="absolute right-[-12%] top-1/2 h-[420px] w-[420px] rounded-full bg-ochre/10 blur-[120px]" />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-6 pt-24 sm:pt-32 lg:px-8">
-        
-        {/* Encabezado Centrado */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold text-indigo-600 shadow-sm ring-1 ring-slate-200 mb-6">
-            <span className="h-2 w-2 rounded-full bg-indigo-600 animate-pulse" />
+      <div className="mx-auto grid max-w-[1400px] gap-12 container-px py-14 sm:py-20 lg:grid-cols-[0.85fr_1fr] lg:gap-16">
+        <div className="lg:pt-6">
+          <span className="eyebrow inline-flex items-center gap-2.5 text-clay">
+            <span className="h-2 w-2 rounded-sm bg-ochre" />
             {t.contactPage.eyebrow}
           </span>
-          <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 sm:text-7xl mb-6">
+          <h1 className="display mt-6 text-5xl font-bold uppercase leading-[0.95] text-cream-paper sm:text-7xl">
             {t.contactPage.titlePart1}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-clay to-ochre">
               {t.contactPage.titlePart2}
             </span>
           </h1>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="mt-7 max-w-md text-pretty font-mono text-[0.95rem] leading-relaxed text-cream-paper/60">
             {t.contactPage.desc}
           </p>
+
+          <Button
+            asChild
+            className="mt-8 border border-clay/30 bg-ink-2 text-clay transition-colors hover:bg-clay hover:text-ink"
+          >
+            <Link href="/personalizado">
+              {t.contactPage.payBtn}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+
+          <div className="mt-12 space-y-5 border-t border-clay/20 pt-8">
+            {DETAILS.map((detail) => (
+              <a
+                key={detail.label}
+                href={detail.href}
+                className="group flex items-center gap-4"
+              >
+                <span className="grid h-11 w-11 place-items-center rounded-md border border-clay/20 bg-ink-2 text-clay transition-all group-hover:border-clay group-hover:bg-clay group-hover:text-ink group-hover:shadow-[0_0_15px_rgba(0,229,255,0.3)]">
+                  <detail.icon className="h-4 w-4" />
+                </span>
+                <span>
+                  <span className="block font-mono text-[0.62rem] uppercase tracking-[0.16em] text-cream-paper/40">
+                    {detail.label}
+                  </span>
+                  <span className="mt-0.5 block font-mono text-sm font-medium text-cream-paper/90 transition-colors group-hover:text-clay">
+                    {detail.value}
+                  </span>
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* Tarjetas de Información (Nuevo Layout Estructural) */}
-        <div className="grid sm:grid-cols-3 gap-6 mb-16">
-          {DETAILS.map((d) => (
-            <a
-              key={d.label}
-              href={d.href}
-              className="group flex flex-col items-center text-center p-8 bg-white rounded-3xl shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="h-14 w-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                <d.icon className="h-6 w-6" />
-              </div>
-              <span className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">
-                {d.label}
-              </span>
-              <span className="text-slate-900 font-bold text-lg">
-                {d.value}
-              </span>
-            </a>
-          ))}
-        </div>
-
-        {/* Formulario Centrado */}
-        <div className="max-w-3xl mx-auto">
-          <ContactForm />
-        </div>
+        <ContactForm />
       </div>
     </section>
   );
