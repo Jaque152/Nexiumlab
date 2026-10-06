@@ -2,157 +2,195 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { ArrowUpRight, CheckCircle2, Plus, ShoppingBag } from "lucide-react";
+
+import {
+  ArrowUpRight,
+  Check,
+  Plus,
+} from "lucide-react";
+
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import { Button } from "@/components/ui/button";
-import { useCart, IVA_RATE, type CartProduct } from "@/lib/cart-context";
+import { useCart } from "@/lib/cart-context";
+
+import {
+  formatMXN,
+  type ProductPlan,
+} from "@/lib/products";
+
 import { useLanguage } from "@/lib/language-context";
-
-// 1. Declaración local para evitar el error de importación roto
-export function formatMXN(amount: number) {
-  return new Intl.NumberFormat("es-MX", {
-    style: "currency",
-    currency: "MXN",
-  }).format(amount);
-}
-
-// 2. Interfaz estricta para los datos que recibe este componente
-export interface LocalProductPlan {
-  id: string;
-  priceMXN: number;
-  imageUrl: string;
-  es: {
-    name: string;
-    description: string;
-    features: string[];
-  };
-  en: {
-    name: string;
-    description: string;
-    features: string[];
-  };
-}
 
 export function ProductCard({
   product,
   index,
 }: {
-  product: LocalProductPlan;
+  product: ProductPlan;
   index: number;
 }) {
   const { add, open } = useCart();
   const { t, lang } = useLanguage();
-  const [dialogOpen, setDialogOpen] = useState(false);
 
-  // Tipado estricto para el idioma
-  const data = product[lang as "es" | "en"];
+  const [dialogOpen, setDialogOpen] =
+    useState(false);
+
+  const data = product[lang];
+
+  const taxText =
+    lang === "es" ? "+ IVA" : "+ TAX";
 
   const handleAdd = () => {
-    // 3. Casteo seguro: LocalProductPlan cumple perfectamente con la forma de CartProduct
-    add(product as CartProduct);
-    
-    toast.success(t.store.addedToastTitle, {
-      description: data.name,
-      action: { label: t.store.viewCartBtn, onClick: () => open() },
-    });
+    add(product);
+
+    toast.success(
+      t.store.addedToastTitle,
+      {
+        description: data.name,
+
+        action: {
+          label: t.store.viewCartBtn,
+          onClick: () => open(),
+        },
+      }
+    );
   };
 
   return (
-    <article className="group flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white p-4 shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_18px_40px_rgba(0,71,255,0.10)] sm:p-5">
+      <span className="pointer-events-none absolute right-4 top-3 z-10 display text-4xl text-dark/10 transition-colors group-hover:text-primary/15">
+        {String(index + 1).padStart(
+          2,
+          "0"
+        )}
+      </span>
+
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-light">
         <img
           src={product.imageUrl}
           alt={data.name}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-700 shadow-sm border border-slate-100">
-          Plan {String(index + 1).padStart(2, "0")}
-        </div>
+
+        <span className="absolute left-3 top-3 rounded-full border border-white/60 bg-white/90 px-2.5 py-1 font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-primary backdrop-blur">
+          MXN · {taxText}
+        </span>
       </div>
 
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
-        <h3 className="text-xl font-extrabold text-slate-900 leading-tight">
+      <div className="flex flex-1 flex-col px-1 pt-5">
+        <h3 className="display text-xl leading-snug text-dark">
           {data.name}
         </h3>
-        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-500">
+
+        <p className="mt-2 line-clamp-2 font-mono text-[0.85rem] leading-relaxed text-dark/55">
           {data.description}
         </p>
 
-        <div className="mt-8 flex items-end justify-between">
+        <div className="mt-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-3xl font-black text-indigo-600">
-              {formatMXN(product.priceMXN)}
+            <p className="display text-2xl text-primary">
+              {formatMXN(
+                product.priceMXN
+              )}
             </p>
-            <p className="text-[0.7rem] font-bold uppercase tracking-widest text-slate-400 mt-1">
-              MXN · {lang === "es" ? "+ IVA" : "+ TAX"}
+
+            <p className="mt-1 font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-dark/40">
+              MXN · {taxText}
             </p>
           </div>
-          
-          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+
+          <Dialog
+            open={dialogOpen}
+            onOpenChange={setDialogOpen}
+          >
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-600 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors"
-                aria-label="Ver detalles"
+                className="flex items-center gap-1 font-mono text-[0.68rem] font-bold uppercase tracking-[0.12em] text-primary transition-colors hover:text-dark"
               >
-                <ArrowUpRight className="w-5 h-5" />
+                {t.store.cardDetails}
+
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </button>
             </DialogTrigger>
-            
-            <DialogContent className="max-w-4xl w-[95vw] p-0 overflow-hidden rounded-[2rem] border-0 shadow-2xl bg-white [&>button]:text-slate-400 [&>button]:hover:text-slate-900 [&>button]:right-6 [&>button]:top-6 [&>button]:bg-white [&>button]:rounded-full [&>button]:p-2 [&>button]:shadow-sm">
-              <div className="grid md:grid-cols-5 h-full max-h-[90vh] overflow-y-auto">
-                <div className="md:col-span-2 relative h-64 md:h-auto bg-slate-100">
-                  <img
-                    src={product.imageUrl}
-                    alt={data.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-                
-                <div className="md:col-span-3 p-8 sm:p-12 flex flex-col">
-                  <DialogTitle className="text-3xl font-extrabold text-slate-900 leading-tight">
-                    {data.name}
-                  </DialogTitle>
-                  <p className="mt-4 text-base leading-relaxed text-slate-600">
-                    {data.description}
-                  </p>
-                  
-                  <div className="mt-8 pt-8 border-t border-slate-100 flex-1">
-                    <p className="text-sm font-bold text-slate-900 mb-4">{t.store.cardIncludes}</p>
-                    <ul className="space-y-4">
-                      {data.features.map((f) => (
-                        <li key={f} className="flex items-start gap-3 text-sm text-slate-600">
-                          <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0" />
-                          <span className="leading-relaxed">{f}</span>
-                        </li>
-                      ))}
-                    </ul>
+
+            <DialogContent className="max-h-[92dvh] w-[95vw] max-w-2xl overflow-y-auto overflow-x-hidden rounded-3xl border border-black/10 bg-white p-0 shadow-[0_24px_80px_rgba(0,0,0,0.14)] sm:w-full [&>button]:right-4 [&>button]:top-4 [&>button]:z-50 [&>button]:rounded-full [&>button]:border [&>button]:border-black/10 [&>button]:bg-white [&>button]:p-1.5 [&>button]:text-dark">
+              <div className="grid gap-0 md:grid-cols-2">
+                <div className="border-b border-black/10 bg-light p-6 md:border-b-0 md:border-r">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-white">
+                    <img
+                      src={product.imageUrl}
+                      alt={data.name}
+                      className="h-full w-full object-cover"
+                    />
                   </div>
 
-                  <div className="mt-10 bg-slate-50 rounded-2xl border border-slate-100 p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block mb-1">
+                  <DialogTitle className="display mt-5 text-2xl leading-tight text-dark">
+                    {data.name}
+                  </DialogTitle>
+
+                  <p className="mt-3 font-mono text-[0.85rem] leading-relaxed text-dark/60">
+                    {data.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-col bg-white p-6">
+                  <p className="eyebrow">
+                    {t.store.cardIncludes}
+                  </p>
+
+                  <ul className="mt-4 flex-1 space-y-3">
+                    {data.features.map(
+                      (feature) => (
+                        <li
+                          key={feature}
+                          className="flex items-start gap-3 font-mono text-[0.85rem] text-dark/80"
+                        >
+                          <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent text-dark">
+                            <Check className="h-3 w-3" />
+                          </span>
+
+                          {feature}
+                        </li>
+                      )
+                    )}
+                  </ul>
+
+                  <div className="mt-6 border-t border-black/10 pt-5">
+                    <div className="flex items-end justify-between gap-4">
+                      <span className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.14em] text-dark/50">
                         {t.store.cardTotalIva}
                       </span>
-                      <span className="text-3xl font-black text-slate-900">
-                        {formatMXN(product.priceMXN * (1 + IVA_RATE))} <span className="text-lg text-indigo-600">MXN</span>
-                      </span>
+
+                      <div className="text-right">
+                        <span className="display block text-2xl text-primary">
+                          {formatMXN(
+                            product.priceMXN
+                          )}
+                        </span>
+
+                        <span className="font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-dark/40">
+                          MXN · {taxText}
+                        </span>
+                      </div>
                     </div>
+
                     <Button
-                      className="w-full sm:w-auto bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl font-bold px-8 h-12 shadow-lg shadow-indigo-200 transition-all hover:scale-105"
+                      className="mt-4 w-full rounded-full bg-primary font-bold text-white hover:bg-dark"
+                      size="lg"
                       onClick={() => {
                         handleAdd();
                         setDialogOpen(false);
                       }}
                     >
-                      <ShoppingBag className="w-4 h-4 mr-2" />
                       {t.store.cardHire}
+
+                      <Plus className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
                 </div>
@@ -161,12 +199,13 @@ export function ProductCard({
           </Dialog>
         </div>
 
-        <Button 
-          onClick={handleAdd} 
-          className="mt-8 w-full bg-slate-900 text-white hover:bg-indigo-600 rounded-xl h-12 font-bold transition-all shadow-md"
+        <Button
+          onClick={handleAdd}
+          className="mt-5 w-full rounded-full border border-primary bg-primary text-white transition-all hover:bg-dark"
         >
           {t.store.cardHire}
-          <Plus className="w-4 h-4 ml-2" />
+
+          <Plus className="ml-2 h-4 w-4" />
         </Button>
       </div>
     </article>
