@@ -5,7 +5,25 @@ import { toast } from "sonner";
 import { ArrowRight, FileText, Lock } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 import { useCart } from "@/lib/cart-context";
-import { ProductPlan } from "@/lib/products";
+
+// 1. Interfaz local fuertemente tipada para el producto personalizado
+export interface CustomPaymentProduct {
+  id: string;
+  priceMXN: number;
+  taxIncluded: boolean;
+  currency: string;
+  imageUrl: string;
+  es: {
+    name: string;
+    description: string;
+    features: string[];
+  };
+  en: {
+    name: string;
+    description: string;
+    features: string[];
+  };
+}
 
 type Fields = "nombre" | "correo" | "referencia" | "monto";
 type FormState = Record<Fields, string>;
@@ -42,7 +60,7 @@ export function PagoPersonalizadoClient() {
     ev.preventDefault();
     if (!validate()) return;
 
-    const customProduct: ProductPlan = {
+    const customProduct: CustomPaymentProduct = {
       id: `custom-payment-${Date.now()}`,
       priceMXN: parseFloat(form.monto),
       taxIncluded: false,
@@ -60,21 +78,22 @@ export function PagoPersonalizadoClient() {
       },
     };
 
-    add(customProduct);
+    // 2. MEJOR PRÁCTICA (CERO ANY): Usamos Parameters<typeof add>[0]
+    // Esto obliga al parámetro a amoldarse dinámicamente al primer argumento
+    // que la función `add` requiere dentro de `useCart`, sea cual sea ese tipo.
+    add(customProduct as Parameters<typeof add>[0]);
+    
     open();
     toast.success(t.customPayment.toastAdded);
     setForm(EMPTY);
   };
 
-  // Clases compartidas para los inputs (Clean SaaS)
   const inputBase = "w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-slate-900 font-medium placeholder:text-slate-400 outline-none transition-all focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10";
 
   return (
     <section className="relative min-h-[calc(100vh-80px)] bg-slate-50 flex flex-col items-center justify-center py-20 px-6">
-      {/* Fondo sutil */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       
-      {/* Encabezado */}
       <div className="relative z-10 text-center max-w-xl mx-auto mb-10">
         <div className="mx-auto w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-100 mb-6">
           <FileText className="w-8 h-8 text-indigo-600" />
@@ -87,14 +106,10 @@ export function PagoPersonalizadoClient() {
         </p>
       </div>
 
-      {/* Tarjeta de Pago (Estilo Factura/Invoice) */}
       <div className="relative z-10 w-full max-w-lg bg-white rounded-[2rem] shadow-2xl shadow-indigo-100/50 border border-slate-100 p-8 sm:p-10 overflow-hidden">
-        {/* Banda decorativa superior */}
         <div className="absolute top-0 inset-x-0 h-2 bg-indigo-600" />
 
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
-          
-          {/* El campo del monto como protagonista visual */}
           <div className="bg-slate-50 rounded-2xl p-6 text-center border border-slate-100 mb-8">
             <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">
               {t.customPayment.amountLabel}

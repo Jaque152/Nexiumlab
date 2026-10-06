@@ -1,12 +1,22 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { ProductPlan } from "./products";
 
 export const IVA_RATE = 0.16;
 
+// 1. Interfaz unificada y estricta para CUALQUIER producto que entre al carrito
+export interface CartProduct {
+  id?: string;
+  nombre?: string;
+  precio?: number;
+  priceMXN?: number;
+  imageUrl?: string;
+  es?: { name: string; description?: string; features?: string[] };
+  en?: { name: string; description?: string; features?: string[] };
+}
+
 export interface CartItem {
-  product: ProductPlan;
+  product: CartProduct;
   qty: number;
 }
 
@@ -21,7 +31,7 @@ interface CartContextType {
   open: () => void;
   close: () => void;
   toggle: () => void;
-  add: (product: ProductPlan) => void;
+  add: (product: CartProduct) => void;
   setQty: (id: string, qty: number) => void;
   remove: (id: string) => void;
   clear: () => void;
@@ -35,25 +45,29 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("NexiumLab_cart");
+    const saved = localStorage.getItem("Devion_cart");
     if (saved) setItems(JSON.parse(saved));
     setHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (hydrated) localStorage.setItem("NexiumLab_cart", JSON.stringify(items));
+    if (hydrated) localStorage.setItem("Devion_cart", JSON.stringify(items));
   }, [items, hydrated]);
 
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const add = (product: ProductPlan) => {
+  const add = (product: CartProduct) => {
+    // Generamos un ID seguro en caso de que sea un Paquete de Marketing que solo tiene "nombre"
+    const productId = product.id || product.nombre;
+    if (!productId) return;
+
     setItems((prev) => {
-      const ex = prev.find((i) => i.product.id === product.id);
+      const ex = prev.find((i) => (i.product.id || i.product.nombre) === productId);
       if (ex)
         return prev.map((i) =>
-          i.product.id === product.id ? { ...i, qty: i.qty + 1 } : i
+          (i.product.id || i.product.nombre) === productId ? { ...i, qty: i.qty + 1 } : i
         );
       return [...prev, { product, qty: 1 }];
     });
@@ -62,16 +76,23 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const setQty = (id: string, qty: number) => {
     if (qty < 1) return remove(id);
     setItems((prev) =>
-      prev.map((i) => (i.product.id === id ? { ...i, qty } : i))
+      prev.map((i) => ((i.product.id || i.product.nombre) === id ? { ...i, qty } : i))
     );
   };
 
   const remove = (id: string) =>
-    setItems((prev) => prev.filter((i) => i.product.id !== id));
+    setItems((prev) => prev.filter((i) => (i.product.id || i.product.nombre) !== id));
+    
   const clear = () => setItems([]);
 
   const count = items.reduce((acc, i) => acc + i.qty, 0);
-  const subtotal = items.reduce((acc, i) => acc + i.product.priceMXN * i.qty, 0);
+  
+  // 2. Cálculo de precios dinámico estricto (cero any)
+  const subtotal = items.reduce((acc, i) => {
+    const price = i.product.priceMXN ?? i.product.precio ?? 0;
+    return acc + (price * i.qty);
+  }, 0);
+  
   const iva = subtotal * IVA_RATE;
   const total = subtotal + iva;
 

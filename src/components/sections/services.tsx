@@ -1,68 +1,70 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, BarChart2, Globe, Mail, MonitorSmartphone, Share2, Target } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { Reveal } from "@/components/site/reveal";
 import { useLanguage } from "@/lib/language-context";
+
+// Tipado explícito para evitar errores 'any' en el build
+interface ServiceItem {
+  n: string;
+  title: string;
+  desc: string;
+}
 
 export function Services() {
   const { t } = useLanguage();
-  
-  // Iconos asignados a cada uno de los 6 servicios nuevos
-  const icons = [Share2, Target, BarChart2, Mail, Globe, MonitorSmartphone];
 
   return (
-    <section id="servicios" className="relative bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-[1400px] container-px relative z-10">
-        
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 border-b border-black/5 pb-12">
+    <section id="servicios" className="bg-ink py-24 sm:py-32 border-t border-clay/20">
+      <div className="mx-auto max-w-[1400px] container-px">
+        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <span className="text-sm font-black uppercase tracking-widest text-accent bg-dark px-4 py-2 rounded-full shadow-lg">
+            <span className="eyebrow inline-flex items-center gap-2.5 text-clay">
+              <span className="h-2 w-2 bg-ochre rounded-sm" />
               {t.services.eyebrow}
             </span>
-            <h2 className="display mt-8 text-5xl font-black text-dark sm:text-6xl">
-              {t.services.title}
-            </h2>
+            <Reveal>
+              <h2 className="display mt-6 text-balance text-4xl font-bold leading-[1.1] text-cream-paper sm:text-5xl lg:text-6xl">
+                {t.services.title}
+              </h2>
+            </Reveal>
           </div>
-          <p className="max-w-md text-lg font-medium text-dark/60 leading-relaxed">
+          <p className="max-w-sm text-pretty text-[0.95rem] leading-relaxed text-cream-paper/60 border-l-2 border-clay/30 pl-4">
             {t.services.desc}
           </p>
         </div>
 
-        {/* Grid de 6 servicios exactos como en la imagen */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {t.services.items.map((item: any, i: number) => {
-            const Icon = icons[i];
-            return (
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Se aplicó el tipo ServiceItem a 'item' */}
+          {t.services.items.map((item: ServiceItem, i: number) => (
+            <Reveal key={item.n} delay={i * 0.1}>
               <Link
-                key={item.n}
                 href="/servicios"
-                className="group relative flex flex-col justify-between rounded-[2rem] bg-light p-8 transition-all duration-500 hover:-translate-y-2 hover:bg-primary hover:shadow-[0_20px_40px_rgba(0,71,255,0.2)] border border-black/5"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-ink-2 bg-ink-2/50 p-8 transition-all hover:border-clay hover:bg-ink-2 hover:shadow-[0_0_30px_rgba(0,229,255,0.1)]"
               >
+                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-clay/5 blur-[50px] transition-all group-hover:bg-clay/20" />
+                
                 <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <span className="grid h-16 w-16 place-items-center rounded-2xl bg-white text-primary shadow-sm group-hover:bg-accent group-hover:text-dark transition-colors duration-500">
-                      <Icon className="h-8 w-8" />
-                    </span>
-                    <span className="font-black text-4xl text-dark/5 group-hover:text-white/20 transition-colors">
-                      {item.n}
-                    </span>
-                  </div>
-                  <h3 className="display text-2xl font-black text-dark mb-4 group-hover:text-white transition-colors duration-500">
+                  <span className="font-mono text-sm font-bold text-clay">
+                    {item.n}
+                  </span>
+                  <h3 className="display mt-5 text-2xl font-semibold text-cream-paper transition-colors group-hover:text-clay">
                     {item.title}
                   </h3>
-                  <p className="text-dark/60 font-medium leading-relaxed group-hover:text-white/80 transition-colors duration-500">
+                  <p className="mt-4 text-sm leading-relaxed text-cream-paper/60">
                     {item.desc}
                   </p>
                 </div>
                 
-                <div className="mt-10 flex justify-start">
-                  <span className="flex items-center gap-2 font-bold text-sm uppercase tracking-widest text-primary group-hover:text-accent transition-colors">
-                    Explorar <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <div className="mt-8 flex justify-end">
+                  <span className="grid h-10 w-10 place-items-center rounded-sm bg-ink text-clay border border-clay/20 transition-all group-hover:bg-clay group-hover:text-ink">
+                    <ArrowUpRight className="h-4 w-4" />
                   </span>
                 </div>
               </Link>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

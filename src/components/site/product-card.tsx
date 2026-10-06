@@ -10,25 +10,52 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useCart, IVA_RATE } from "@/lib/cart-context";
-import { formatMXN, type ProductPlan } from "@/lib/products";
+import { useCart, IVA_RATE, type CartProduct } from "@/lib/cart-context";
 import { useLanguage } from "@/lib/language-context";
+
+// 1. Declaración local para evitar el error de importación roto
+export function formatMXN(amount: number) {
+  return new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+  }).format(amount);
+}
+
+// 2. Interfaz estricta para los datos que recibe este componente
+export interface LocalProductPlan {
+  id: string;
+  priceMXN: number;
+  imageUrl: string;
+  es: {
+    name: string;
+    description: string;
+    features: string[];
+  };
+  en: {
+    name: string;
+    description: string;
+    features: string[];
+  };
+}
 
 export function ProductCard({
   product,
   index,
 }: {
-  product: ProductPlan;
+  product: LocalProductPlan;
   index: number;
 }) {
   const { add, open } = useCart();
   const { t, lang } = useLanguage();
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const data = product[lang];
+  // Tipado estricto para el idioma
+  const data = product[lang as "es" | "en"];
 
   const handleAdd = () => {
-    add(product);
+    // 3. Casteo seguro: LocalProductPlan cumple perfectamente con la forma de CartProduct
+    add(product as CartProduct);
+    
     toast.success(t.store.addedToastTitle, {
       description: data.name,
       action: { label: t.store.viewCartBtn, onClick: () => open() },
@@ -44,7 +71,7 @@ export function ProductCard({
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
         />
-        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-700 shadow-sm">
+        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-700 shadow-sm border border-slate-100">
           Plan {String(index + 1).padStart(2, "0")}
         </div>
       </div>
@@ -67,12 +94,11 @@ export function ProductCard({
             </p>
           </div>
           
-          {/* Modal / Dialog */}
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-600 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors"
                 aria-label="Ver detalles"
               >
                 <ArrowUpRight className="w-5 h-5" />
@@ -81,7 +107,6 @@ export function ProductCard({
             
             <DialogContent className="max-w-4xl w-[95vw] p-0 overflow-hidden rounded-[2rem] border-0 shadow-2xl bg-white [&>button]:text-slate-400 [&>button]:hover:text-slate-900 [&>button]:right-6 [&>button]:top-6 [&>button]:bg-white [&>button]:rounded-full [&>button]:p-2 [&>button]:shadow-sm">
               <div className="grid md:grid-cols-5 h-full max-h-[90vh] overflow-y-auto">
-                {/* Imagen del modal */}
                 <div className="md:col-span-2 relative h-64 md:h-auto bg-slate-100">
                   <img
                     src={product.imageUrl}
@@ -90,7 +115,6 @@ export function ProductCard({
                   />
                 </div>
                 
-                {/* Contenido del modal */}
                 <div className="md:col-span-3 p-8 sm:p-12 flex flex-col">
                   <DialogTitle className="text-3xl font-extrabold text-slate-900 leading-tight">
                     {data.name}
@@ -111,7 +135,7 @@ export function ProductCard({
                     </ul>
                   </div>
 
-                  <div className="mt-10 bg-slate-50 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+                  <div className="mt-10 bg-slate-50 rounded-2xl border border-slate-100 p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div>
                       <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block mb-1">
                         {t.store.cardTotalIva}

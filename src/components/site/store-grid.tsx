@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { webPlans, paquetesPrecios, servicios } from "@/lib/products";
+import { paquetesPrecios, servicios } from "@/lib/products";
 import { ProductCard } from "./product-card";
 import { useLanguage } from "@/lib/language-context";
 import { CheckCircle2, ChevronRight, LayoutTemplate, Megaphone, ServerCog } from "lucide-react";
@@ -15,14 +15,15 @@ export function StoreGrid() {
       {/* Navegación de Pestañas */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
         <div className="inline-flex bg-slate-100 p-1.5 rounded-2xl">
+          
           <button
-            onClick={() => setActiveTab("web")}
+            onClick={() => setActiveTab("core")}
             className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${
-              activeTab === "web" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
+              activeTab === "core" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
             }`}
           >
-            <LayoutTemplate className="w-4 h-4" />
-            Desarrollo Web
+            <ServerCog className="w-4 h-4" />
+            Servicios Base
           </button>
           <button
             onClick={() => setActiveTab("marketing")}
@@ -33,26 +34,8 @@ export function StoreGrid() {
             <Megaphone className="w-4 h-4" />
             Marketing Digital
           </button>
-          <button
-            onClick={() => setActiveTab("core")}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${
-              activeTab === "core" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
-            }`}
-          >
-            <ServerCog className="w-4 h-4" />
-            Servicios Base
-          </button>
         </div>
       </div>
-
-      {/* CONTENIDO: PLANES WEB (Usa el ProductCard modificado) */}
-      {activeTab === "web" && (
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {webPlans.map((p, i) => (
-            <ProductCard key={p.id} product={p} index={i} />
-          ))}
-        </div>
-      )}
 
       {/* CONTENIDO: PAQUETES DE MARKETING */}
       {activeTab === "marketing" && (
