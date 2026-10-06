@@ -3,15 +3,15 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const OCTANO_BASE_URL = "https://pagos.octanopayments.com/api/v1";
+const ETOMIN_BASE_URL = "https://pagos.etomin.com/api/v1";
 
-async function safeOctanoFetch(url: string, options: RequestInit) {
+async function safeEtominFetch(url: string, options: RequestInit) {
   const headers = new Headers(options.headers || {});
   if (!headers.has("User-Agent")) {
     headers.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
   }
   if (!headers.has("Origin")) {
-    headers.set("Origin", "https://Devion.com.mx");
+    headers.set("Origin", "https://nexiumlab.com.mx");
   }
 
   const res = await fetch(url, { ...options, headers });
@@ -82,22 +82,24 @@ export async function processCheckout(payload: CheckoutPayload) {
     const orderId = `PC-${Math.floor(100000 + Math.random() * 899999)}`;
     const currentLang = lang || "es";
 
-    const emailStr = process.env.OCTANO_EMAIL;
-    const passwordStr = process.env.OCTANO_PASSWORD;
+    const emailStr = process.env.ETOMIN_EMAIL;
+    const passwordStr = process.env.ETOMIN_PASSWORD;
 
     if (!emailStr || !passwordStr) {
       throw new Error("Credenciales de la pasarela no configuradas en el servidor.");
     }
 
-    const authData = await safeOctanoFetch(`${OCTANO_BASE_URL}/signin`, {
+    // 1. AUTENTICACIÓN EN ETOMIN (Usa JSON estándar en lugar de x-www-form-urlencoded)
+    const authData = await safeEtominFetch(`${ETOMIN_BASE_URL}/signin`, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ email: emailStr, password: passwordStr }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: emailStr, password: passwordStr }),
     });
 
     if (!authData.authToken) throw new Error("Error de autenticación con la pasarela.");
     const token = authData.authToken;
 
+    // 2. TOKENIZACIÓN DE TARJETA
     const expParts = form.exp.split("/");
     const cardData = {
       cardNumber: form.card.replace(/\s/g, ""),
@@ -106,7 +108,7 @@ export async function processCheckout(payload: CheckoutPayload) {
       expirationYear: `20${expParts[1].trim()}`,
     };
 
-    const tokenData = await safeOctanoFetch(`${OCTANO_BASE_URL}/card/tokenizer`, {
+    const tokenData = await safeEtominFetch(`${ETOMIN_BASE_URL}/card/tokenizer`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -117,9 +119,10 @@ export async function processCheckout(payload: CheckoutPayload) {
 
     if (!tokenData.cardNumberToken) throw new Error("Error al procesar la tarjeta.");
 
+    // 3. PROCESAR LA VENTA
     const salePayload = {
       amount: Math.round(totals.total * 100) / 100,
-      currency: 484,
+      currency: 484, // MXN Obligatorio
       reference: orderId,
       customerInformation: {
         firstName: form.nombre,
@@ -142,10 +145,10 @@ export async function processCheckout(payload: CheckoutPayload) {
         quantity: i.qty,
         id: String(i.product.id),
       })),
-      redirectUrl: "https://devion.com.mx/checkout",
+      redirectUrl: "https://nexiumlab.com.mx/checkout",
     };
 
-    const saleData = await safeOctanoFetch(`${OCTANO_BASE_URL}/sale`, {
+    const saleData = await safeEtominFetch(`${ETOMIN_BASE_URL}/sale`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -186,8 +189,8 @@ async function enviarCorreos(
   totals: { subtotal: number; iva: number; total: number },
   lang: "es" | "en"
 ) {
-  const adminEmail = "hola@devion.com.mx";
-  const senderEmail = "Devion <hola@devion.com.mx>"; 
+  const adminEmail = "hola@nexiumlab.com.mx";
+  const senderEmail = "NexiumLab <hola@nexiumlab.com.mx>"; 
 
   const texts = {
     es: {
@@ -201,7 +204,7 @@ async function enviarCorreos(
       emailLabel: `Email:`,
       phoneLabel: `Teléfono:`,
       companyLabel: `Empresa/RFC:`,
-      footer: `Devion — Estudio Digital CDMX.`
+      footer: `NexiumLab. .`
     },
     en: {
       subjectClient: `Thank you for your order! Folio: ${orderId}`,
@@ -214,7 +217,7 @@ async function enviarCorreos(
       emailLabel: `Email:`,
       phoneLabel: `Phone:`,
       companyLabel: `Company/Tax ID:`,
-      footer: `Devion — Digital Studio CDMX.`
+      footer: `NexiumLab. .`
     }
   };
 
@@ -227,7 +230,7 @@ async function enviarCorreos(
     </tr>
   `).join("");
 
-  // Diseño oscuro Devion
+  // Diseño oscuro NexiumLab
   const emailBody = `
     <div style="font-family: 'Courier New', Courier, monospace; max-width: 600px; margin: 0 auto; background-color: #0A0A0A; color: #FAFAFA; border: 1px solid #00E5FF33; border-radius: 12px; overflow: hidden;">
       <div style="background: linear-gradient(90deg, #00E5FF 0%, #B026FF 100%); height: 4px; width: 100%;"></div>

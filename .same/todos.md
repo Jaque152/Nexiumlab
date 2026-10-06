@@ -1,6 +1,6 @@
-# Devion — Warm Editorial Reimagining
+# NexiumLab — Warm Editorial Reimagining
 
-Clone of Devion.com with a **different visual design** (warm editorial luxury: cream + terracotta/clay + espresso, Fraunces + Hanken Grotesk + JetBrains Mono) and added e-commerce functionality.
+Clone of NexiumLab.com with a **different visual design** (warm editorial luxury: cream + terracotta/clay + espresso, Fraunces + Hanken Grotesk + JetBrains Mono) and added e-commerce functionality.
 
 ## Foundation
 - [ ] Install shadcn components + framer-motion

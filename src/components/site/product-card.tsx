@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { ArrowUpRight, Check, Plus } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Plus, ShoppingBag } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -36,100 +36,99 @@ export function ProductCard({
   };
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-clay/20 bg-ink-2 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-clay/60 hover:shadow-[0_12px_30px_rgba(0,229,255,0.15)] sm:p-5">
-      <span className="pointer-events-none absolute right-4 top-3 z-10 display text-4xl font-bold text-ink drop-shadow-sm transition-colors group-hover:text-clay/20">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-ink">
+    <article className="group flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
         <img
           src={product.imageUrl}
           alt={data.name}
-          className="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-100 mix-blend-screen"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
         />
-        <span className="absolute left-3 top-3 rounded-sm bg-ink/90 border border-clay/20 px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-clay backdrop-blur">
-          MXN {lang === "es" ? "+ IVA" : "+ TAX"}
-        </span>
+        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-slate-700 shadow-sm">
+          Plan {String(index + 1).padStart(2, "0")}
+        </div>
       </div>
 
-      <div className="flex flex-1 flex-col px-1 pt-5">
-        <h3 className="display text-xl font-bold leading-snug text-cream-paper">
+      <div className="flex flex-1 flex-col p-6 sm:p-8">
+        <h3 className="text-xl font-extrabold text-slate-900 leading-tight">
           {data.name}
         </h3>
-        <p className="mt-2 line-clamp-2 text-[0.85rem] leading-relaxed text-cream-paper/60 font-mono">
+        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-500">
           {data.description}
         </p>
 
-        <div className="mt-5 flex items-end justify-between">
+        <div className="mt-8 flex items-end justify-between">
           <div>
-            <p className="display text-2xl font-bold text-clay">
+            <p className="text-3xl font-black text-indigo-600">
               {formatMXN(product.priceMXN)}
             </p>
-            <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-cream-paper/40 mt-1">
+            <p className="text-[0.7rem] font-bold uppercase tracking-widest text-slate-400 mt-1">
               MXN · {lang === "es" ? "+ IVA" : "+ TAX"}
             </p>
           </div>
           
+          {/* Modal / Dialog */}
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="flex items-center gap-1 font-mono text-[0.68rem] uppercase tracking-[0.12em] font-semibold text-clay/80 transition-colors hover:text-clay"
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+                aria-label="Ver detalles"
               >
-                {t.store.cardDetails}
-                <ArrowUpRight className="h-3.5 w-3.5" />
+                <ArrowUpRight className="w-5 h-5" />
               </button>
             </DialogTrigger>
             
-            <DialogContent className="max-h-[92dvh] w-[95vw] max-w-2xl overflow-y-auto overflow-x-hidden rounded-xl border border-clay/30 bg-ink-2 p-0 sm:w-full [&>button]:right-4 [&>button]:top-4 [&>button]:z-50 [&>button]:rounded-md [&>button]:bg-ink [&>button]:border [&>button]:border-clay/20 [&>button]:p-1.5 [&>button]:text-clay [&>button]:shadow-sm shadow-[0_0_50px_rgba(0,229,255,0.1)]">
-              <div className="grid gap-0 md:grid-cols-2">
-                <div className="bg-ink p-6 border-b md:border-b-0 md:border-r border-clay/10">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-ink">
-                    <img
-                      src={product.imageUrl}
-                      alt={data.name}
-                      className="h-full w-full object-cover opacity-80 mix-blend-screen"
-                    />
-                  </div>
-                  <DialogTitle className="display mt-5 text-2xl font-bold leading-tight text-cream-paper">
+            <DialogContent className="max-w-4xl w-[95vw] p-0 overflow-hidden rounded-[2rem] border-0 shadow-2xl bg-white [&>button]:text-slate-400 [&>button]:hover:text-slate-900 [&>button]:right-6 [&>button]:top-6 [&>button]:bg-white [&>button]:rounded-full [&>button]:p-2 [&>button]:shadow-sm">
+              <div className="grid md:grid-cols-5 h-full max-h-[90vh] overflow-y-auto">
+                {/* Imagen del modal */}
+                <div className="md:col-span-2 relative h-64 md:h-auto bg-slate-100">
+                  <img
+                    src={product.imageUrl}
+                    alt={data.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+                
+                {/* Contenido del modal */}
+                <div className="md:col-span-3 p-8 sm:p-12 flex flex-col">
+                  <DialogTitle className="text-3xl font-extrabold text-slate-900 leading-tight">
                     {data.name}
                   </DialogTitle>
-                  <p className="mt-3 text-[0.85rem] leading-relaxed text-cream-paper/70 font-mono">
+                  <p className="mt-4 text-base leading-relaxed text-slate-600">
                     {data.description}
                   </p>
-                </div>
-                <div className="flex flex-col p-6">
-                  <p className="eyebrow text-clay">{t.store.cardIncludes}</p>
-                  <ul className="mt-4 flex-1 space-y-3">
-                    {data.features.map((f) => (
-                      <li key={f} className="flex items-start gap-3 text-[0.85rem] text-cream-paper/90 font-mono">
-                        <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-sm bg-clay/10 text-clay border border-clay/30">
-                          <Check className="h-2.5 w-2.5" />
-                        </span>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-6 border-t border-clay/20 pt-5">
-                    <div className="flex items-baseline justify-between">
-                      <span className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-cream-paper/50 font-bold">
+                  
+                  <div className="mt-8 pt-8 border-t border-slate-100 flex-1">
+                    <p className="text-sm font-bold text-slate-900 mb-4">{t.store.cardIncludes}</p>
+                    <ul className="space-y-4">
+                      {data.features.map((f) => (
+                        <li key={f} className="flex items-start gap-3 text-sm text-slate-600">
+                          <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0" />
+                          <span className="leading-relaxed">{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-10 bg-slate-50 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block mb-1">
                         {t.store.cardTotalIva}
                       </span>
-                      <span className="display text-2xl font-bold text-cream-paper">
-                        {formatMXN(product.priceMXN * (1 + IVA_RATE))} <span className="text-lg text-clay">MXN</span>
+                      <span className="text-3xl font-black text-slate-900">
+                        {formatMXN(product.priceMXN * (1 + IVA_RATE))} <span className="text-lg text-indigo-600">MXN</span>
                       </span>
                     </div>
                     <Button
-                      className="mt-4 w-full bg-clay text-ink hover:bg-cream-paper hover:text-ink rounded-md font-bold shadow-[0_0_15px_rgba(0,229,255,0.2)]"
-                      size="lg"
+                      className="w-full sm:w-auto bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl font-bold px-8 h-12 shadow-lg shadow-indigo-200 transition-all hover:scale-105"
                       onClick={() => {
                         handleAdd();
                         setDialogOpen(false);
                       }}
                     >
+                      <ShoppingBag className="w-4 h-4 mr-2" />
                       {t.store.cardHire}
-                      <Plus className="h-4 w-4 ml-2" />
                     </Button>
                   </div>
                 </div>
@@ -138,9 +137,12 @@ export function ProductCard({
           </Dialog>
         </div>
 
-        <Button onClick={handleAdd} className="mt-5 w-full bg-ink border border-clay/30 text-clay hover:bg-clay hover:text-ink rounded-md transition-all">
+        <Button 
+          onClick={handleAdd} 
+          className="mt-8 w-full bg-slate-900 text-white hover:bg-indigo-600 rounded-xl h-12 font-bold transition-all shadow-md"
+        >
           {t.store.cardHire}
-          <Plus className="h-4 w-4 ml-2" />
+          <Plus className="w-4 h-4 ml-2" />
         </Button>
       </div>
     </article>

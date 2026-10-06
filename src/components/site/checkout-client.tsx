@@ -21,7 +21,6 @@ import { formatMXN } from "@/lib/products";
 import { useLanguage } from "@/lib/language-context";
 import { processCheckout, type CheckoutFormState, type CheckoutItem } from "@/app/actions/checkout";
 
-// Forzamos que los campos requeridos coincidan estrictamente con la interfaz del servidor
 const REQUIRED: (keyof CheckoutFormState)[] = [
   "nombre",
   "apellidos",
@@ -133,7 +132,6 @@ export function CheckoutClient() {
     
     setLoading(true);
 
-    // Mapeamos estrictamente los items a la interfaz que espera el servidor (eliminando el uso de `any`)
     const checkoutItems: CheckoutItem[] = items.map((i) => ({
       product: {
         id: i.product.id,
@@ -362,11 +360,9 @@ export function CheckoutClient() {
                 <Lock className="h-3.5 w-3.5 shrink-0 text-clay" />
                 Pago encriptado y seguro
               </div>
-              <img 
-                src="/logo-octano-2.png" 
-                alt="Procesado por Octano Payments" 
-                className="h-[30px] object-contain opacity-80 mix-blend-multiply" 
-              />
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-ink/80">
+                Etomin Payments
+              </span>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">

@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/language-context";
 
 function VisaBadge() {
   return (
-    <span className="grid h-8 w-12 place-items-center rounded-md bg-cream-paper shadow-sm">
+    <span className="grid h-8 w-12 place-items-center rounded-md bg-white border border-black/5 shadow-sm">
       <span className="font-display text-sm font-black italic tracking-tight text-[#1434CB]">
         VISA
       </span>
@@ -16,7 +16,7 @@ function VisaBadge() {
 
 function MastercardBadge() {
   return (
-    <span className="flex h-8 w-12 items-center justify-center rounded-md bg-cream-paper shadow-sm">
+    <span className="flex h-8 w-12 items-center justify-center rounded-md bg-white border border-black/5 shadow-sm">
       <span className="h-5 w-5 rounded-full bg-[#EB001B]" />
       <span className="-ml-2 h-5 w-5 rounded-full bg-[#F79E1B] mix-blend-multiply opacity-90" />
     </span>
@@ -25,67 +25,54 @@ function MastercardBadge() {
 
 export function Footer() {
   const { t } = useLanguage();
-
   const legalRoutes = ["/privacidad", "/terminos", "/devoluciones"];
 
   return (
-    <footer className="ink-panel text-cream-paper border-t-4 border-clay">
-      <div className="mx-auto max-w-[1400px] container-px">
-        {/* main */}
-        <div className="grid grid-cols-1 gap-12 py-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
-          <div className="space-y-6">
-            <Logo variant="cream" />
-            <div className="flex flex-col gap-2">
+    <footer className="relative overflow-hidden bg-white border-t border-black/5 pt-20 pb-10">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+      <div className="mx-auto max-w-[1400px] container-px relative z-10">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4 mb-16">
+          <div className="lg:col-span-2 space-y-6">
+            <Logo variant="default" />
+            <p className="max-w-sm text-dark/60 mt-4 leading-relaxed font-medium">
+              Elevando marcas a través del diseño estratégico, la tecnología y el marketing digital de alto rendimiento.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-sm font-bold text-primary uppercase tracking-widest">{t.footer.contactEyebrow}</p>
+            <div className="flex flex-col gap-3 text-sm font-medium">
+              <a href="mailto:consulta@nexiumlab.com.mx" className="text-dark/70 hover:text-primary transition-colors">
+                consulta@nexiumlab.com.mx
+              </a>
+              <a href="https://nexiumlab.com.mx" className="text-dark/70 hover:text-primary transition-colors">
+                nexiumlab.com.mx
+              </a>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-sm font-bold text-primary uppercase tracking-widest">Legal</p>
+            <div className="flex flex-col gap-3 text-sm font-medium">
               {t.footer.legal.map((label: string, index: number) => (
-                <Link
-                  key={label}
-                  href={legalRoutes[index] || "#"}
-                  className="w-fit font-mono text-[0.72rem] uppercase tracking-[0.12em] font-semibold text-cream-paper/50 transition-colors hover:text-clay"
-                >
+                <Link key={label} href={legalRoutes[index] || "#"} className="text-dark/70 hover:text-primary transition-colors">
                   {label}
                 </Link>
               ))}
             </div>
-          </div>
-
-          <div className="space-y-4">
-            <p className="eyebrow text-clay">{t.footer.contactEyebrow}</p>
-            <div className="flex flex-col gap-2 font-mono text-sm">
-              <a
-                href="tel:+525598261186"
-                className="text-cream-paper/80 transition-colors hover:text-clay"
-              >
-                +52 55 9826 1186
-              </a>
-              <a
-                href="mailto:hola@devion.com.mx"
-                className="text-cream-paper/80 transition-colors hover:text-clay"
-              >
-                hola@devion.com.mx
-              </a>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <p className="eyebrow text-clay">{t.footer.addressEyebrow}</p>
-            <p className="max-w-xs text-sm leading-relaxed text-cream-paper/70 font-medium">
-              {t.footer.addressText}
-            </p>
-            <div className="flex items-center gap-2 pt-2">
+            
+            {/* Logos de pago */}
+            <div className="flex items-center gap-2 pt-4">
               <VisaBadge />
               <MastercardBadge />
             </div>
           </div>
         </div>
 
-        {/* bottom */}
-        <div className="flex flex-col items-start justify-between gap-3 border-t border-cream-paper/10 py-7 sm:flex-row sm:items-center">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-cream-paper/40 font-semibold">
-            {t.footer.copyright.replace('Devion', 'Devion')}
-          </p>
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-cream-paper/40 font-semibold">
-            Devion Studio
-          </p>
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-black/5 text-xs font-bold text-dark/40 uppercase tracking-widest">
+          <p>© {new Date().getFullYear()} NexiumLab. Todos los derechos reservados.</p>
+          <p className="mt-4 md:mt-0">Diseñado en México.</p>
         </div>
       </div>
     </footer>

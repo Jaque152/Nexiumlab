@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CheckoutClient } from "@/components/site/checkout-client";
 
 export const metadata: Metadata = {
-  title: "Checkout — Devion",
+  title: "Checkout — NexiumLab",
   description: "Finaliza la contratación de tu plan digital.",
 };
 

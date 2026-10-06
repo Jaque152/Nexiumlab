@@ -34,8 +34,8 @@ export async function processContact(payload: ContactPayload) {
 
     const { form, lang } = payload;
 
-    const adminEmail = "hola@devion.com.mx";
-    const senderEmail = "Devion <hola@devion.com.mx>";
+    const adminEmail = "consulta@nexiumlab.com.mx";
+    const senderEmail = "NexiumLab <hola@nexiumlab.com.mx>";
 
     console.log("==========================================");
     console.log("📨 NUEVO FORMULARIO DE CONTACTO");
@@ -51,7 +51,7 @@ export async function processContact(payload: ContactPayload) {
 
     const texts = {
       es: {
-        subjectClient: "Hemos recibido tu mensaje - Devion",
+        subjectClient: "Hemos recibido tu mensaje - NexiumLab",
         subjectAdmin: `Nuevo mensaje de contacto: ${form.nombre}`,
         title: "¡Gracias por contactarnos!",
         hello: "Hola",
@@ -63,11 +63,11 @@ export async function processContact(payload: ContactPayload) {
         phone: "Teléfono:",
         subject: "Asunto:",
         message: "Mensaje:",
-        footer: "Devion — Estudio Digital CDMX.",
+        footer: "NexiumLab.",
       },
 
       en: {
-        subjectClient: "We have received your message - Devion",
+        subjectClient: "We have received your message - NexiumLab",
         subjectAdmin: `New contact message: ${form.nombre}`,
         title: "Thank you for reaching out!",
         hello: "Hello",
@@ -79,7 +79,7 @@ export async function processContact(payload: ContactPayload) {
         phone: "Phone:",
         subject: "Subject:",
         message: "Message:",
-        footer: "Devion — Digital Studio CDMX.",
+        footer: "NexiumLab — Digital Studio CDMX.",
       },
     };
 
@@ -278,7 +278,7 @@ export async function processContact(payload: ContactPayload) {
       html: emailBody,
 
       // Si el cliente responde al correo automático,
-      // la respuesta llegará a Devion.
+      // la respuesta llegará a NexiumLab.
       replyTo: adminEmail,
     });
 
@@ -307,7 +307,7 @@ export async function processContact(payload: ContactPayload) {
     );
 
     // ======================================================
-    // ENVIAR CORREO A DEVION
+    // ENVIAR CORREO A NexiumLab
     // ======================================================
 
     console.log(
@@ -330,8 +330,7 @@ export async function processContact(payload: ContactPayload) {
         </div>
       `,
 
-      // Al responder desde hola@devion.com.mx,
-      // responderá directamente al cliente.
+
       replyTo: form.correo,
     });
 

@@ -16,7 +16,6 @@ export function Header() {
   const { count, toggle, hydrated } = useCart();
   const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -26,80 +25,71 @@ export function Header() {
   }, []);
 
   return (
-    <header className={cn("fixed top-0 w-full z-50 transition-all duration-500", scrolled ? "py-2" : "py-4")}>
-      <div className="mx-auto max-w-[1400px] container-px">
-        <div
-          className={cn(
-            "flex h-[70px] items-center justify-between gap-6 px-6 rounded-2xl transition-all duration-500",
-            scrolled ? "glass-panel" : "bg-transparent"
-          )}
-        >
-          <Link href="/" aria-label="NexiumLab inicio">
-            <Logo variant="default" />
-          </Link>
+    <header className="fixed top-0 w-full z-50 flex justify-center pt-6 px-4 pointer-events-none">
+      <div
+        className={cn(
+          "pointer-events-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between gap-6 rounded-[2rem] px-6 transition-all duration-500",
+          scrolled ? "bg-white/80 backdrop-blur-xl border border-black/5 shadow-[0_10px_40px_rgba(0,0,0,0.08)]" : "bg-white/95 shadow-sm border border-black/5"
+        )}
+      >
+        <Link href="/" aria-label="Inicio">
+          <Logo variant="default" />
+        </Link>
 
-          <nav className="hidden items-center gap-8 md:flex bg-white/50 px-6 py-2 rounded-full border border-black/5 backdrop-blur-md">
-            {t.header.nav.map((l: { href: string; label: string }) => {
-              const active = pathname === l.href;
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={cn(
-                    "text-sm font-bold uppercase tracking-wider transition-all hover:-translate-y-0.5",
-                    active ? "text-primary" : "text-dark/70 hover:text-primary"
-                  )}
-                >
-                  {l.label}
-                </Link>
-              );
-            })}
-          </nav>
+        <nav className="hidden items-center gap-8 md:flex">
+          {t.header.nav.map((l: { href: string; label: string }) => {
+            const active = pathname === l.href;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={cn(
+                  "text-[0.8rem] font-bold uppercase tracking-widest transition-all hover:text-primary relative",
+                  active ? "text-primary" : "text-dark/60"
+                )}
+              >
+                {l.label}
+                {active && <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-accent rounded-full" />}
+              </Link>
+            );
+          })}
+        </nav>
 
-          <div className="flex items-center gap-4">
-            <div className="flex bg-white rounded-lg p-1 border border-black/5 shadow-sm">
-              <button onClick={() => setLang("es")} className={cn("px-2 py-1 text-xs font-bold rounded-md transition-all", lang === "es" ? "bg-primary text-white" : "text-dark/50")}>ES</button>
-              <button onClick={() => setLang("en")} className={cn("px-2 py-1 text-xs font-bold rounded-md transition-all", lang === "en" ? "bg-primary text-white" : "text-dark/50")}>EN</button>
-            </div>
-
-            {/* CTA en color Lima Ácido para máxima conversión */}
-            <Button asChild size="sm" className="hidden sm:inline-flex bg-accent text-dark font-black hover:bg-primary hover:text-white border-0 shadow-lg transition-all hover:scale-105 rounded-full px-6">
-              <Link href="/contacto">{t.header.cta}</Link>
-            </Button>
-
-            <button onClick={toggle} className="relative p-2 rounded-full bg-white border border-black/5 hover:bg-light transition-colors shadow-sm">
-              <ShoppingBag className="h-5 w-5 text-dark" />
-              {hydrated && count > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                  {count}
-                </span>
-              )}
-            </button>
-
-            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-              <SheetTrigger asChild>
-                <button className="p-2 md:hidden text-dark"><Menu className="h-6 w-6" /></button>
-              </SheetTrigger>
-              <SheetContent side="right" className="bg-light w-full border-l border-black/10 p-0 text-dark">
-                <div className="flex h-full flex-col p-6">
-                  <Logo variant="default" />
-                  <nav className="flex flex-1 flex-col justify-center gap-4 mt-10">
-                    {t.header.nav.map((l: { href: string; label: string }) => (
-                      <SheetClose asChild key={l.href}>
-                        <Link href={l.href} className="text-3xl font-display font-bold hover:text-primary transition-colors border-b border-black/5 pb-4">
-                          {l.label}
-                        </Link>
-                      </SheetClose>
-                    ))}
-                  </nav>
-                  <div className="mt-auto">
-                    <Button asChild className="w-full bg-accent text-dark font-black hover:bg-primary hover:text-white rounded-full"><Link href="/contacto">{t.header.cta}</Link></Button>
-                    <p className="mt-4 text-center text-xs text-dark/50">consulta@nexiumlab.com.mx</p>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:flex bg-light rounded-full p-1 border border-black/5">
+            <button onClick={() => setLang("es")} className={cn("px-3 py-1.5 text-[0.7rem] font-black rounded-full transition-all", lang === "es" ? "bg-white text-primary shadow-sm" : "text-dark/40")}>ES</button>
+            <button onClick={() => setLang("en")} className={cn("px-3 py-1.5 text-[0.7rem] font-black rounded-full transition-all", lang === "en" ? "bg-white text-primary shadow-sm" : "text-dark/40")}>EN</button>
           </div>
+
+          <Button asChild className="hidden lg:inline-flex rounded-full bg-accent text-dark font-black px-6 hover:bg-primary hover:text-white shadow-[0_8px_20px_rgba(212,255,0,0.3)] hover:shadow-primary/30 transition-all hover:-translate-y-1">
+            <Link href="/contacto">{t.header.cta}</Link>
+          </Button>
+
+          <button onClick={toggle} className="relative flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white hover:bg-dark transition-transform hover:scale-105 shadow-lg shadow-primary/20">
+            <ShoppingBag className="h-5 w-5" />
+            {hydrated && count > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-dark text-[10px] font-black border-2 border-white">
+                {count}
+              </span>
+            )}
+          </button>
+
+          {/* Menú Móvil */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="md:hidden h-12 w-12 flex items-center justify-center rounded-full bg-light text-dark"><Menu className="h-5 w-5" /></button>
+            </SheetTrigger>
+            <SheetContent side="left" className="bg-white p-8">
+              <Logo variant="default" />
+              <div className="mt-12 flex flex-col gap-6">
+                {t.header.nav.map((l: { href: string; label: string }) => (
+                  <SheetClose asChild key={l.href}>
+                    <Link href={l.href} className="text-2xl font-black text-dark hover:text-primary">{l.label}</Link>
+                  </SheetClose>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
