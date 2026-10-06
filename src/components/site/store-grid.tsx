@@ -1,107 +1,161 @@
 "use client";
 
-import { useState } from "react";
-import { paquetesPrecios, servicios } from "@/lib/products";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowDownRight, ArrowUpRight, Layers3 } from "lucide-react";
+import {
+  getPlansByService,
+  SERVICE_IDS,
+  type ServiceId,
+} from "@/lib/products";
 import { ProductCard } from "./product-card";
 import { useLanguage } from "@/lib/language-context";
-import { CheckCircle2, ChevronRight, LayoutTemplate, Megaphone, ServerCog } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function StoreGrid() {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<"web" | "marketing" | "core">("web");
+  const [selectedService, setSelectedService] = useState<ServiceId | null>(null);
+
+  useEffect(() => {
+    const syncFromHash = () => {
+      const hash = window.location.hash.replace("#", "") as ServiceId;
+      if (SERVICE_IDS.includes(hash)) {
+        setSelectedService(hash);
+        window.requestAnimationFrame(() => {
+          document.getElementById(hash)?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      }
+    };
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  const selectedIndex = selectedService
+    ? SERVICE_IDS.indexOf(selectedService)
+    : -1;
+  const selectedCopy =
+    selectedIndex >= 0 ? t.services.items[selectedIndex] : null;
+  const selectedPlans = useMemo(
+    () => (selectedService ? getPlansByService(selectedService) : []),
+    [selectedService]
+  );
+
+  const chooseService = (serviceId: ServiceId) => {
+    setSelectedService(serviceId);
+    window.history.replaceState(null, "", `#${serviceId}`);
+    window.requestAnimationFrame(() => {
+      document.getElementById(serviceId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
 
   return (
     <div>
-      {/* Navegación de Pestañas */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-        <div className="inline-flex bg-slate-100 p-1.5 rounded-2xl">
-          
-          <button
-            onClick={() => setActiveTab("core")}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${
-              activeTab === "core" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
-            }`}
-          >
-            <ServerCog className="w-4 h-4" />
-            Servicios Base
-          </button>
-          <button
-            onClick={() => setActiveTab("marketing")}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${
-              activeTab === "marketing" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
-            }`}
-          >
-            <Megaphone className="w-4 h-4" />
-            Marketing Digital
-          </button>
+      <div className="flex flex-col gap-3 border-y border-clay/20 py-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="font-mono text-[0.64rem] font-bold uppercase tracking-[0.16em] text-clay">
+            {t.store.baseServicesEyebrow}
+          </p>
+          <h2 className="display mt-2 text-2xl font-bold text-cream-paper sm:text-3xl">
+            {t.store.baseServicesTitle}
+          </h2>
         </div>
+        <p className="max-w-lg text-sm leading-relaxed text-cream-paper/50">
+          {t.store.baseServicesDesc}
+        </p>
       </div>
 
-      {/* CONTENIDO: PAQUETES DE MARKETING */}
-      {activeTab === "marketing" && (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {paquetesPrecios.map((paquete) => (
-            <div key={paquete.nombre} className="flex flex-col bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300">
-              <h3 className="text-xl font-extrabold text-slate-900">{paquete.nombre}</h3>
-              <div className="mt-4 flex items-baseline gap-2">
-                <span className="text-3xl font-black text-indigo-600">{paquete.precio_formato}</span>
-              </div>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">
-                {paquete.moneda} {paquete.impuesto}
-              </p>
-              
-              <ul className="mt-8 space-y-4 flex-1">
-                {paquete.caracteristicas.map((caracteristica, idx) => (
-                  <li key={idx} className="flex gap-3 text-sm text-slate-600">
-                    <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0" />
-                    <span>{caracteristica}</span>
-                  </li>
-                ))}
-              </ul>
-              <button className="mt-8 w-full bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white font-bold py-3 rounded-xl transition-colors">
-                Consultar plan
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        {t.services.items.map((service, index) => {
+          const serviceId = SERVICE_IDS[index];
+          const active = selectedService === serviceId;
 
-      {/* CONTENIDO: SERVICIOS BASE */}
-      {activeTab === "core" && (
-        <div className="grid gap-8 lg:grid-cols-2">
-          {servicios.map((servicio) => (
-            <div key={servicio.servicio} className="bg-slate-50 border border-slate-100 rounded-[2rem] p-8 sm:p-10 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-2xl font-extrabold text-slate-900">{servicio.servicio}</h3>
-              <p className="mt-3 text-slate-600 text-lg">{servicio.descripcion_corta}</p>
-              <p className="mt-2 text-sm text-slate-500">{servicio.descripcion_detallada}</p>
-              
-              <div className="mt-8 pt-8 border-t border-slate-200 grid sm:grid-cols-2 gap-8">
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-4">Beneficios principales</h4>
-                  <ul className="space-y-3">
-                    {servicio.beneficios.map((beneficio, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm text-slate-600">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                        {beneficio}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-4">Características</h4>
-                  <ul className="space-y-4">
-                    {servicio.caracteristicas.map((feat, idx) => (
-                      <li key={idx} className="text-sm">
-                        <span className="font-semibold text-indigo-600 block">{feat.titulo}</span>
-                        <span className="text-slate-500">{feat.descripcion}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          return (
+            <button
+              key={service.n}
+              type="button"
+              onClick={() => chooseService(serviceId)}
+              aria-expanded={active}
+              className={cn(
+                "group flex min-h-[270px] flex-col rounded-xl border p-5 text-left transition-all duration-300",
+                active
+                  ? "border-clay bg-clay/[0.08] shadow-[0_12px_35px_rgba(0,229,255,0.12)]"
+                  : "border-clay/15 bg-ink-2 hover:-translate-y-1 hover:border-clay/45"
+              )}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[0.65rem] font-bold text-ochre">
+                  {service.n}
+                </span>
+                <Layers3
+                  className={cn(
+                    "h-4 w-4 transition-colors",
+                    active ? "text-clay" : "text-cream-paper/25 group-hover:text-clay"
+                  )}
+                />
               </div>
+
+              <h3 className="display mt-6 text-2xl font-bold leading-tight text-cream-paper">
+                {service.title}
+              </h3>
+              <p className="mt-4 flex-1 text-[0.82rem] leading-relaxed text-cream-paper/55">
+                {service.desc}
+              </p>
+              <span className="mt-6 inline-flex items-center gap-2 font-mono text-[0.65rem] font-bold uppercase tracking-[0.12em] text-clay">
+                {active ? t.store.serviceOpen : t.store.serviceView}
+                {active ? (
+                  <ArrowDownRight className="h-4 w-4" />
+                ) : (
+                  <ArrowUpRight className="h-4 w-4" />
+                )}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {selectedService && selectedCopy && (
+        <section
+          id={selectedService}
+          className="scroll-mt-28 mt-10 overflow-hidden rounded-2xl border border-clay/25 bg-ink-2"
+        >
+          <div className="grid gap-8 border-b border-clay/15 p-6 sm:p-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+            <div>
+              <p className="font-mono text-[0.64rem] font-bold uppercase tracking-[0.16em] text-ochre">
+                {selectedCopy.n} · {t.store.selectedServiceLabel}
+              </p>
+              <h3 className="display mt-3 text-4xl font-bold text-cream-paper sm:text-5xl">
+                {selectedCopy.title}
+              </h3>
             </div>
-          ))}
-        </div>
+            <p className="text-[0.95rem] leading-7 text-cream-paper/65">
+              {selectedCopy.fullDesc}
+            </p>
+          </div>
+
+          <div className="p-6 sm:p-8">
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <p className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.14em] text-clay">
+                {String(selectedPlans.length).padStart(2, "0")} {t.store.plansCountLabel}
+              </p>
+              <p className="text-right text-xs text-cream-paper/40">
+                {t.store.planHelpText}
+              </p>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {selectedPlans.map((plan, index) => (
+                <ProductCard key={plan.id} product={plan} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
       )}
     </div>
   );
