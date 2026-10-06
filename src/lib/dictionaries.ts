@@ -51,10 +51,11 @@ export const dictionaries = {
         "Marcas digitales",
         "Soluciones ecommerce",
       ],
-      titlePart1: "Dev",
-      titlePart2: "ion",
+      titlePart1: "Nexium",
+      titlePart2: "lab",
       deliveryText:
         "Soluciones profesionales,\ndesarrolladas 100% en línea.",
+      ctaBtn: "Ver servicios",
     },
 
     about: {
