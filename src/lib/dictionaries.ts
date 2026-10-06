@@ -55,6 +55,7 @@ export const dictionaries = {
       titlePart2: "ion",
       deliveryText:
         "Soluciones profesionales,\ndesarrolladas 100% en línea.",
+      ctaBtn: "Ver servicios",
     },
 
     about: {
