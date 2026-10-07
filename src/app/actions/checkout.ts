@@ -189,8 +189,8 @@ async function enviarCorreos(
   totals: { subtotal: number; iva: number; total: number },
   lang: "es" | "en"
 ) {
-  const adminEmail = "hola@nexiumlab.com.mx";
-  const senderEmail = "NexiumLab <hola@nexiumlab.com.mx>"; 
+  const adminEmail = "consulta@nexiumlab.com.mx";
+  const senderEmail = "NexiumLab <consulta@nexiumlab.com.mx>"; 
 
   const texts = {
     es: {

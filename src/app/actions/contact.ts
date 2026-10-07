@@ -35,7 +35,39 @@ export async function processContact(payload: ContactPayload) {
     const { form, lang } = payload;
 
     const adminEmail = "consulta@nexiumlab.com.mx";
-    const senderEmail = "NexiumLab <hola@nexiumlab.com.mx>";
+    const senderEmail = "NexiumLab <consulta@nexiumlab.com.mx>";
+
+    // ======================================================
+    // VALIDACIONES DE SERVIDOR
+    // ======================================================
+
+    if (!form.nombre?.trim()) {
+      return {
+        success: false,
+        error: "El nombre es obligatorio.",
+      };
+    }
+
+    if (!form.correo?.trim()) {
+      return {
+        success: false,
+        error: "El correo electrónico es obligatorio.",
+      };
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.correo.trim())) {
+      return {
+        success: false,
+        error: "El correo electrónico no es válido.",
+      };
+    }
+
+    if (!form.mensaje?.trim()) {
+      return {
+        success: false,
+        error: "El mensaje es obligatorio.",
+      };
+    }
 
     console.log("==========================================");
     console.log("📨 NUEVO FORMULARIO DE CONTACTO");
@@ -84,6 +116,24 @@ export async function processContact(payload: ContactPayload) {
     };
 
     const t = texts[lang] || texts.es;
+
+    // ======================================================
+    // ESCAPAR HTML BÁSICO
+    // ======================================================
+
+    const escapeHtml = (value: string) =>
+      value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    const safeNombre = escapeHtml(form.nombre.trim());
+    const safeCorreo = escapeHtml(form.correo.trim());
+    const safeTelefono = escapeHtml(form.telefono?.trim() || "N/A");
+    const safeAsunto = escapeHtml(form.asunto?.trim() || "N/A");
+    const safeMensaje = escapeHtml(form.mensaje.trim());
 
     // ======================================================
     // CUERPO DEL CORREO
@@ -136,7 +186,7 @@ export async function processContact(payload: ContactPayload) {
           >
             ${t.hello}
             <strong style="color: #00E5FF;">
-              ${form.nombre}
+              ${safeNombre}
             </strong>,
           </p>
 
@@ -178,7 +228,7 @@ export async function processContact(payload: ContactPayload) {
             </strong>
 
             <span style="color: #FAFAFA;">
-              ${form.nombre}
+              ${safeNombre}
             </span>
 
             <br />
@@ -188,7 +238,7 @@ export async function processContact(payload: ContactPayload) {
             </strong>
 
             <span style="color: #FAFAFA;">
-              ${form.correo}
+              ${safeCorreo}
             </span>
 
             <br />
@@ -198,7 +248,7 @@ export async function processContact(payload: ContactPayload) {
             </strong>
 
             <span style="color: #FAFAFA;">
-              ${form.telefono || "N/A"}
+              ${safeTelefono}
             </span>
 
             <br />
@@ -208,7 +258,7 @@ export async function processContact(payload: ContactPayload) {
             </strong>
 
             <span style="color: #FAFAFA;">
-              ${form.asunto || "N/A"}
+              ${safeAsunto}
             </span>
 
             <br />
@@ -235,7 +285,7 @@ export async function processContact(payload: ContactPayload) {
                 line-height: 1.6;
               "
             >
-              ${form.mensaje}
+              ${safeMensaje}
             </div>
           </div>
 
@@ -273,12 +323,9 @@ export async function processContact(payload: ContactPayload) {
 
     const clientRes = await resend.emails.send({
       from: senderEmail,
-      to: [form.correo],
+      to: [form.correo.trim()],
       subject: t.subjectClient,
       html: emailBody,
-
-      // Si el cliente responde al correo automático,
-      // la respuesta llegará a NexiumLab.
       replyTo: adminEmail,
     });
 
@@ -302,12 +349,12 @@ export async function processContact(payload: ContactPayload) {
     }
 
     console.log(
-      "✅ Correo al cliente enviado correctamente.",
+      "✅ Correo al cliente aceptado por Resend.",
       clientRes.data?.id
     );
 
     // ======================================================
-    // ENVIAR CORREO A NexiumLab
+    // ENVIAR CORREO A NEXIUMLAB
     // ======================================================
 
     console.log(
@@ -318,7 +365,6 @@ export async function processContact(payload: ContactPayload) {
       from: senderEmail,
       to: [adminEmail],
       subject: t.subjectAdmin,
-
       html: `
         <div
           style="
@@ -329,9 +375,7 @@ export async function processContact(payload: ContactPayload) {
           ${emailBody}
         </div>
       `,
-
-
-      replyTo: form.correo,
+      replyTo: form.correo.trim(),
     });
 
     console.log(
@@ -354,7 +398,7 @@ export async function processContact(payload: ContactPayload) {
     }
 
     console.log(
-      "✅ Correo al administrador enviado correctamente.",
+      "✅ Correo al administrador aceptado por Resend.",
       adminRes.data?.id
     );
 
@@ -364,6 +408,8 @@ export async function processContact(payload: ContactPayload) {
 
     return {
       success: true,
+      clientEmailId: clientRes.data?.id || null,
+      adminEmailId: adminRes.data?.id || null,
     };
   } catch (error: unknown) {
     console.error(
