@@ -206,7 +206,7 @@ export function About() {
                 asChild
                 className="mt-8 w-full rounded-full bg-primary font-bold text-white hover:bg-dark"
               >
-                <Link href="/servicios">
+                <Link href="/precios">
                   {t.about.pricingCta}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
