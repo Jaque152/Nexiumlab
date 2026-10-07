@@ -27,20 +27,24 @@ export const dictionaries = {
     },
 
     footer: {
+      legalTitle: "Legal",
       legal: [
-        "Política de privacidad",
-        "Términos y condiciones de uso",
-        "Lineamientos de cancelación y reembolso",
+        "Aviso de privacidad",
+        "Términos y condiciones",
+        "Política de Devoluciones, Reembolsos y Cancelación",
       ],
-      contactEyebrow: "Escríbenos",
+      contactEyebrow: "Contacto",
+      description:
+        "Elevando marcas a través del diseño estratégico, la tecnología y el marketing digital de alto rendimiento.",
       addressEyebrow: "Nuestra ubicación",
       addressText:
         "José María Ibarrarán 47, col. San José Insurgentes, Benito Juárez, C.P. 03900, Ciudad de México",
       copyright:
-        "© 2026 Nexiumlab — Desarrollado con propósito desde México.",
+        "© 2026 NexiumLab — Desarrollado con propósito desde México.",
       studio: "Agencia digital",
+      rights: "Todos los derechos reservados.",
+      madeIn: "Diseñado en México.",
     },
-
     hero: {
       eyebrow: "Agencia digital — CDMX",
       est: "Desde 2026 — ©",
@@ -824,18 +828,23 @@ export const dictionaries = {
     },
 
     footer: {
+      legalTitle: "Legal",
       legal: [
         "Privacy Notice",
-        "Terms and Conditions of Use",
-        "Cancellation and Refund Guidelines",
+        "Terms and Conditions",
+        "Returns, Refunds and Cancellation Policy",
       ],
-      contactEyebrow: "Get in Touch",
+      contactEyebrow: "Contact",
+      description:
+        "Elevating brands through strategic design, technology, and high-performance digital marketing.",
       addressEyebrow: "Our Location",
       addressText:
-        "José María Ibarrarán 47, col. San José Insurgentes, Benito Juárez, C.P. 03900, Ciudad de México",
+        "José María Ibarrarán 47, San José Insurgentes, Benito Juárez, C.P. 03900, Mexico City",
       copyright:
-        "© 2026 Nexiumlab — Built with purpose in Mexico.",
+        "© 2026 NexiumLab — Built with purpose in Mexico.",
       studio: "Digital Agency",
+      rights: "All rights reserved.",
+      madeIn: "Designed in Mexico.",
     },
 
     hero: {
