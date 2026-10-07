@@ -601,31 +601,6 @@ export const webPlans: ProductPlan[] = [
   },
 ];
 
-export const SERVICE_IDS = [
-  "sitios-web",
-  "ecommerce",
-  "soluciones-web",
-  "identidad-web",
-  "digital-marketing",
-] as const;
-
-export type ServiceId = (typeof SERVICE_IDS)[number];
-
-const marketingPlanIds = webPlans.map((plan) => plan.id);
-
-export const servicePlanMap: Record<ServiceId, string[]> = {
-  "sitios-web": marketingPlanIds,
-  ecommerce: marketingPlanIds,
-  "soluciones-web": marketingPlanIds,
-  "identidad-web": marketingPlanIds,
-  "digital-marketing": marketingPlanIds,
-};
-
-export function getPlansByService(serviceId: ServiceId) {
-  const allowedIds = new Set(servicePlanMap[serviceId]);
-  return webPlans.filter((plan) => allowedIds.has(plan.id));
-}
-
 export function formatMXN(amount: number) {
   return new Intl.NumberFormat("es-MX", {
     style: "currency",
