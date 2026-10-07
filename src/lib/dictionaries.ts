@@ -12,6 +12,7 @@ export const dictionaries = {
       nav: [
         { href: "/", label: "Principal" },
         { href: "/servicios", label: "Servicios" },
+        { href: "/precios", label: "Precios" },
         { href: "/about", label: "Nosotros" },
         { href: "/contacto", label: "Hablemos" },
       ],
@@ -36,7 +37,7 @@ export const dictionaries = {
       addressText:
         "Boulevard Adolfo López Mateos 2165, Interior 607A Oficina 607A-B Piso 6, Colonia Los Alpes, Alcaldía Álvaro Obregón, C.P. 01010, Ciudad de México",
       copyright:
-        "© 2026 Devion.com.mx — Desarrollado con propósito desde México.",
+        "© 2026 Nexiumlab — Desarrollado con propósito desde México.",
       studio: "Agencia digital",
     },
 
@@ -59,9 +60,9 @@ export const dictionaries = {
     },
 
     about: {
-      eyebrow: "Quiénes somos",
-      titlePart1: "Da forma a tu",
-      titlePart2: "siguiente proyecto digital.",
+      eyebrow: "¿Por qué elegirnos?",
+      titlePart1: "Datos del",
+      titlePart2: "Marketing Digital",
       p1:
         "Somos un equipo digital enfocado en convertir ideas de negocio en experiencias web claras, funcionales y pensadas para generar una presencia profesional en línea.",
       p2:
@@ -70,9 +71,10 @@ export const dictionaries = {
         "Nuestro enfoque combina atención cercana, ejecución completamente en línea y decisiones apoyadas en datos para construir proyectos sostenibles y fáciles de administrar.",
       pageTitlePart1: "Tus aliados para crecer en",
       pageTitlePart2: "digital.",
-      statEyebrow: "Comportamiento multicanal",
-      statText:
-        "de los consumidores se relaciona con las marcas mediante varios canales antes de tomar una decisión de compra.",
+      stat1Num: "72%",
+      stat1Text: "usuarios que interactúan con marcas",
+      stat2Num: "40",
+      stat2Text: "veces más compartido el contenido visual",
       pillarsEyebrow: "Cómo aportamos valor",
       pillarsTitlePart1: "Estrategia, experiencia y mejora",
       pillarsTitlePart2: "continua.",
@@ -117,50 +119,190 @@ export const dictionaries = {
     },
 
     services: {
-      eyebrow: "Lo que hacemos",
-      title: "Soluciones creadas para hacer crecer tu marca.",
+      eyebrow: "Servicios digitales",
+      title: "Seis áreas para impulsar tu presencia digital.",
       desc:
-        "Desarrollamos cada proyecto equilibrando funcionalidad, estética contemporánea y una experiencia intuitiva para el usuario.",
+        "Explora nuestras especialidades. Cada servicio puede trabajarse de forma independiente o combinarse con otros según los objetivos de tu proyecto.",
       items: [
         {
           n: "01",
-          title: "Sitios Web",
+          title: "Marketing en Redes Sociales",
           desc:
-            "Desarrollos profesionales alineados con tu negocio, con una imagen moderna y un proceso completamente digital.",
+            "Gestionamos y optimizamos tus perfiles en redes sociales.",
+          benefits: [
+            "Aumento de seguidores",
+            "Mayor interacción",
+            "Promoción de tu marca",
+          ],
           fullDesc:
-            "Creamos sitios web para emprendedores, profesionistas, restaurantes y empresas que necesitan una presencia digital sólida. Los planes pueden incluir landing pages, sitios corporativos, formularios, agendas, SEO inicial, integraciones y mejoras de rendimiento, dependiendo del alcance contratado.",
+            "Analizamos tu audiencia, desarrollamos contenido atractivo y damos seguimiento al rendimiento de tus perfiles para fortalecer la presencia de tu marca en redes sociales.",
+          features: [
+            {
+              title: "Estrategia de contenidos",
+              description:
+                "Publicamos de forma constante contenido relevante, útil y alineado con la identidad de tu marca.",
+            },
+            {
+              title: "Análisis y reportes",
+              description:
+                "Preparamos informes claros sobre alcance, interacción y comportamiento de tus redes sociales.",
+            },
+            {
+              title: "Optimización continua",
+              description:
+                "Ajustamos la estrategia con base en los datos recopilados para mejorar el impacto de cada acción.",
+            },
+          ],
         },
         {
           n: "02",
-          title: "Ecommerce",
+          title: "SEO (Optimización en Motores de Búsqueda)",
           desc:
-            "Tiendas digitales funcionales con carrito de compra, medios de pago y herramientas de administración.",
+            "Mejoramos tu posicionamiento en buscadores.",
+          benefits: [
+            "Mayor visibilidad",
+            "Aumento de tráfico",
+            "Más conversiones",
+          ],
           fullDesc:
-            "Desarrollamos tiendas en línea con distintos niveles de alcance, desde catálogos compactos hasta ecommerce más robustos con inventario, cupones, múltiples administradores, conexión con pasarelas de pago, logística y métricas comerciales.",
+            "Realizamos una revisión SEO de tu sitio, optimizamos aspectos técnicos y de contenido, y trabajamos oportunidades de posicionamiento para mejorar tu presencia en buscadores.",
+          features: [
+            {
+              title: "Investigación de palabras clave",
+              description:
+                "Identificamos términos de búsqueda relevantes y con potencial para conectar con tu público objetivo.",
+            },
+            {
+              title: "Optimización On-Page y Off-Page",
+              description:
+                "Mejoramos la estructura y el contenido del sitio, además de trabajar señales externas que favorecen su autoridad.",
+            },
+            {
+              title: "Monitoreo y reportes",
+              description:
+                "Damos seguimiento al rendimiento y ajustamos las acciones para sostener y mejorar los resultados.",
+            },
+          ],
         },
         {
           n: "03",
-          title: "Soluciones Web",
+          title: "Publicidad Digital",
           desc:
-            "Sistemas inmobiliarios, portales de empleo y plataformas educativas desarrollados según cada necesidad.",
+            "Diseñamos y gestionamos campañas publicitarias en Google Ads, Facebook Ads y más.",
+          benefits: [
+            "Aumento de visibilidad",
+            "Generación de leads",
+            "Mejor ROI",
+          ],
           fullDesc:
-            "Construimos plataformas y servicios digitales para necesidades específicas, incluyendo portales inmobiliarios, bolsas de empleo, entornos de cursos, soporte remoto, configuración de herramientas, diagnóstico y asesoría técnica. Esta categoría reúne soluciones que van más allá de un sitio informativo tradicional.",
+            "Creamos anuncios orientados a objetivos, definimos audiencias específicas y supervisamos el desempeño de las campañas para aprovechar mejor el presupuesto publicitario.",
+          features: [
+            {
+              title: "Estrategia de anuncios",
+              description:
+                "Definimos una estructura de campaña basada en tus objetivos comerciales, audiencia y presupuesto disponible.",
+            },
+            {
+              title: "Segmentación de audiencias",
+              description:
+                "Utilizamos criterios demográficos, intereses y comportamiento para acercar los anuncios al público adecuado.",
+            },
+            {
+              title: "Optimización de campañas",
+              description:
+                "Ajustamos anuncios, audiencias y pujas para mejorar el rendimiento y reducir costos innecesarios.",
+            },
+          ],
         },
         {
           n: "04",
-          title: "Identidad + Web",
+          title: "Email Marketing",
           desc:
-            "Construcción de marca y desarrollo web integrados en una solución para proyectos de distintos tamaños.",
+            "Creamos campañas de email marketing efectivas.",
+          benefits: [
+            "Fidelización de clientes",
+            "Aumento de ventas",
+            "Mejora de la comunicación",
+          ],
           fullDesc:
-            "Integramos identidad visual y presencia web en un mismo proyecto. Dependiendo del plan, se contemplan propuestas de logotipo, paleta de color, tipografías, recursos para redes sociales, favicon, landing pages o sitios empresariales con formularios y configuración inicial de SEO.",
+            "Diseñamos correos claros y atractivos, segmentamos contactos y analizamos el comportamiento de cada campaña para mejorar la comunicación con tu audiencia.",
+          features: [
+            {
+              title: "Automatización de correos",
+              description:
+                "Configuramos secuencias automáticas para mantener el contacto con clientes y prospectos de forma eficiente.",
+            },
+            {
+              title: "Pruebas A/B",
+              description:
+                "Comparamos asuntos, contenidos o llamadas a la acción para identificar qué variantes generan mejores resultados.",
+            },
+            {
+              title: "Informes detallados",
+              description:
+                "Analizamos aperturas, clics y conversiones para conocer el desempeño real de cada envío.",
+            },
+          ],
         },
         {
           n: "05",
-          title: "Digital + Marketing",
+          title: "Desarrollo Web",
           desc:
-            "Desarrollo web acompañado de SEO, herramientas publicitarias y medición digital desde su implementación.",
+            "Diseñamos y desarrollamos sitios web atractivos y funcionales.",
+          benefits: [
+            "Mejor experiencia de usuario",
+            "Mayor velocidad de carga",
+            "Diseño responsivo",
+          ],
           fullDesc:
-            "Combinamos desarrollo web con herramientas de posicionamiento, analítica y publicidad digital. Los planes disponibles pueden incluir SEO inicial, Google Search Console, Google Analytics, configuración de campañas y píxeles de seguimiento para medir y optimizar el desempeño.",
+            "Desarrollamos experiencias web modernas utilizando tecnologías actuales y buenas prácticas de diseño, rendimiento, accesibilidad y adaptación a distintos dispositivos.",
+          features: [
+            {
+              title: "Diseño personalizado",
+              description:
+                "Creamos una propuesta visual alineada con la identidad, necesidades y objetivos de tu marca.",
+            },
+            {
+              title: "Optimización para SEO",
+              description:
+                "Preparamos la estructura del sitio para facilitar su indexación y mejorar su base técnica para buscadores.",
+            },
+            {
+              title: "Mantenimiento y soporte",
+              description:
+                "Ofrecemos acompañamiento para conservar el sitio actualizado, estable y funcionando correctamente.",
+            },
+          ],
+        },
+        {
+          n: "06",
+          title: "Content Marketing",
+          desc:
+            "Generamos contenido relevante y de calidad para atraer y retener a tu audiencia.",
+          benefits: [
+            "Mejora del SEO",
+            "Aumento de tráfico",
+            "Mejor engagement",
+          ],
+          fullDesc:
+            "Construimos una estrategia de contenidos a partir de tu audiencia, objetivos y canales para generar piezas útiles que ayuden a atraer, informar y mantener el interés de tus usuarios.",
+          features: [
+            {
+              title: "Creación de contenido",
+              description:
+                "Desarrollamos artículos, publicaciones, videos y otros formatos adaptados a las necesidades de tu estrategia.",
+            },
+            {
+              title: "Distribución de contenidos",
+              description:
+                "Publicamos y difundimos el contenido en distintos canales para ampliar su alcance y aprovechar mejor cada pieza.",
+            },
+            {
+              title: "Análisis y ajuste",
+              description:
+                "Evaluamos el rendimiento del contenido y refinamos la estrategia para mejorar sus resultados con el tiempo.",
+            },
+          ],
         },
       ],
     },
@@ -326,11 +468,32 @@ export const dictionaries = {
     },
 
     servicesPage: {
-      eyebrow: "Nuestras soluciones",
-      titlePart1: "Opciones pensadas para hacer crecer tu ",
-      titlePart2: "empresa.",
+      eyebrow: "Servicios",
+      titlePart1: "Una estrategia digital con",
+      titlePart2: "más posibilidades.",
       desc:
-        "Selecciona la alternativa que corresponda mejor con el momento actual de tu proyecto. Todos nuestros paquetes contemplan desarrollo profesional, atención en línea y precios definidos en pesos mexicanos.",
+        "Conoce las seis áreas principales en las que podemos apoyar a tu marca. Selecciona cualquier tarjeta para revisar beneficios, enfoque y características del servicio.",
+      cardAction: "Ver información",
+      detailEyebrow: "Detalle del servicio",
+      benefitsTitle: "Beneficios",
+      featuresTitle: "Qué trabajamos",
+      pricingEyebrow: "Planes disponibles",
+      pricingTitle: "¿Listo para revisar opciones y costos?",
+      pricingDesc:
+        "Consulta nuestros 18 paquetes disponibles, compara alcances y agrega al carrito la alternativa que mejor se adapte a tu proyecto.",
+      pricingButton: "Ver precios y paquetes",
+    },
+
+    pricingPage: {
+      eyebrow: "Precios",
+      titlePart1: "Paquetes listos para",
+      titlePart2: "contratar.",
+      desc:
+        "Revisa nuestras opciones disponibles, compara características y consulta el detalle de cada plan antes de agregarlo al carrito.",
+      catalogTitle: "Explora los paquetes de Nexiumlab",
+      catalogDesc:
+        "Todos los importes se muestran en pesos mexicanos antes de IVA. Abre cualquier tarjeta para consultar el alcance completo del plan.",
+      backToServices: "Volver a servicios",
     },
 
     customPayment: {
@@ -364,6 +527,7 @@ export const dictionaries = {
       nav: [
         { href: "/", label: "Main" },
         { href: "/servicios", label: "Services" },
+        { href: "/precios", label: "Pricing" },
         { href: "/about", label: "About" },
         { href: "/contacto", label: "Let's Talk" },
       ],
@@ -388,7 +552,7 @@ export const dictionaries = {
       addressText:
         "Boulevard Adolfo López Mateos 2165, Interior 607A Oficina 607A-B Piso 6, Colonia Los Alpes, Alcaldía Álvaro Obregón, C.P. 01010, Ciudad de México",
       copyright:
-        "© 2026 Devion.com.mx — Built with purpose in Mexico.",
+        "© 2026 Nexiumlab — Built with purpose in Mexico.",
       studio: "Digital Agency",
     },
 
@@ -403,17 +567,17 @@ export const dictionaries = {
         "Digital brands",
         "Ecommerce solutions",
       ],
-      titlePart1: "Dev",
-      titlePart2: "ion",
+      titlePart1: "Nexium",
+      titlePart2: "lab",
       deliveryText:
         "Professional solutions,\ndelivered entirely online.",
       ctaBtn: "Start your project",
     },
 
     about: {
-      eyebrow: "Who we are",
-      titlePart1: "Bring your next",
-      titlePart2: "digital project to life.",
+      eyebrow: "Why choose us?",
+      titlePart1: "Digital Marketing",
+      titlePart2: "Data",
       p1:
         "We are a digital team focused on turning business ideas into clear, functional web experiences designed to build a professional online presence.",
       p2:
@@ -422,9 +586,10 @@ export const dictionaries = {
         "Our approach combines close support, a fully online workflow, and data-informed decisions to create sustainable projects that are simple to manage.",
       pageTitlePart1: "Your partners for",
       pageTitlePart2: "digital growth.",
-      statEyebrow: "Multichannel behavior",
-      statText:
-        "of consumers interact with brands across multiple channels before making a purchase decision.",
+      stat1Num: "72%",
+      stat1Text: "users interact with brands",
+      stat2Num: "40",
+      stat2Text: "times more shares for visual content",
       pillarsEyebrow: "How we create value",
       pillarsTitlePart1: "Strategy, expertise, and",
       pillarsTitlePart2: "continuous improvement.",
@@ -469,50 +634,190 @@ export const dictionaries = {
     },
 
     services: {
-      eyebrow: "What we do",
-      title: "Solutions created to grow your brand.",
+      eyebrow: "Digital services",
+      title: "Six areas designed to strengthen your digital presence.",
       desc:
-        "Every project combines functionality, contemporary design, and an intuitive experience for the end user.",
+        "Explore our specialties. Each service can be used independently or combined with others according to your project's goals.",
       items: [
         {
           n: "01",
-          title: "Web Solutions",
+          title: "Social Media Marketing",
           desc:
-            "Professional websites aligned with your business, featuring a modern visual approach and a completely digital workflow.",
+            "We manage and optimize your social media profiles.",
+          benefits: [
+            "Follower growth",
+            "Higher engagement",
+            "Brand promotion",
+          ],
           fullDesc:
-            "We create websites for entrepreneurs, professionals, restaurants, and companies that need a solid digital presence. Available plans can include landing pages, corporate websites, forms, appointment tools, initial SEO, integrations, and performance improvements depending on the selected scope.",
+            "We analyze your audience, develop engaging content, and monitor profile performance to strengthen your brand's presence across social media.",
+          features: [
+            {
+              title: "Content strategy",
+              description:
+                "We publish relevant, useful, high-quality content on a consistent basis and align it with your brand identity.",
+            },
+            {
+              title: "Analysis and reporting",
+              description:
+                "We provide clear reports on reach, engagement, and audience behavior across your social channels.",
+            },
+            {
+              title: "Continuous optimization",
+              description:
+                "We refine the strategy using collected data to improve the impact of each action over time.",
+            },
+          ],
         },
         {
           n: "02",
-          title: "Ecommerce",
+          title: "SEO (Search Engine Optimization)",
           desc:
-            "Functional online stores with shopping carts, payment methods, and administration tools.",
+            "We improve your visibility and positioning in search engines.",
+          benefits: [
+            "Greater visibility",
+            "More website traffic",
+            "More conversions",
+          ],
           fullDesc:
-            "We build online stores at different levels of complexity, from compact catalogs to more robust ecommerce experiences with inventory, coupons, multiple administrators, payment gateways, logistics connections, and commercial metrics.",
+            "We review your site's SEO, improve technical and content elements, and work on ranking opportunities to strengthen your presence in search engines.",
+          features: [
+            {
+              title: "Keyword research",
+              description:
+                "We identify relevant search terms with strong potential to connect your business with the right audience.",
+            },
+            {
+              title: "On-Page and Off-Page optimization",
+              description:
+                "We improve site structure and content while also working on external signals that support authority and visibility.",
+            },
+            {
+              title: "Monitoring and reporting",
+              description:
+                "We track performance and refine our actions to maintain and improve results over time.",
+            },
+          ],
         },
         {
           n: "03",
-          title: "Digital Platforms",
+          title: "Digital Advertising",
           desc:
-            "Real estate systems, job portals, and educational platforms developed around your specific requirements.",
+            "We design and manage campaigns on Google Ads, Facebook Ads, and other platforms.",
+          benefits: [
+            "Greater visibility",
+            "Lead generation",
+            "Better ROI",
+          ],
           fullDesc:
-            "We build platforms and digital services for specific needs, including real estate portals, job boards, learning environments, remote support, tool setup, diagnostics, and technical guidance. This category brings together solutions that go beyond a traditional informational website.",
+            "We create goal-oriented ads, define specific audiences, and monitor campaign performance to make better use of your advertising budget.",
+          features: [
+            {
+              title: "Advertising strategy",
+              description:
+                "We build a campaign structure around your business goals, target audience, and available budget.",
+            },
+            {
+              title: "Audience segmentation",
+              description:
+                "We use demographic, interest, and behavioral criteria to connect your ads with the right people.",
+            },
+            {
+              title: "Campaign optimization",
+              description:
+                "We adjust ads, audiences, and bids to improve performance and reduce unnecessary costs.",
+            },
+          ],
         },
         {
           n: "04",
-          title: "Identity + Website",
+          title: "Email Marketing",
           desc:
-            "Brand development and website creation combined into one solution for projects of different sizes.",
+            "We create effective email marketing campaigns.",
+          benefits: [
+            "Customer loyalty",
+            "Higher sales",
+            "Better communication",
+          ],
           fullDesc:
-            "We combine visual identity and web presence in a single project. Depending on the plan, the scope may include logo concepts, color systems, typography, social media assets, favicon, landing pages, or corporate websites with forms and initial SEO setup.",
+            "We design clear and engaging emails, segment your contacts, and analyze campaign behavior to improve communication with your audience.",
+          features: [
+            {
+              title: "Email automation",
+              description:
+                "We set up automated sequences to keep in touch with customers and prospects more efficiently.",
+            },
+            {
+              title: "A/B testing",
+              description:
+                "We compare subject lines, content, or calls to action to determine which variations perform best.",
+            },
+            {
+              title: "Detailed reports",
+              description:
+                "We analyze opens, clicks, and conversions to understand the real performance of each campaign.",
+            },
+          ],
         },
         {
           n: "05",
-          title: "Digital + Marketing",
+          title: "Web Development",
           desc:
-            "Website development supported by SEO, advertising tools, and digital measurement from implementation.",
+            "We design and develop attractive, functional websites.",
+          benefits: [
+            "Better user experience",
+            "Faster loading speed",
+            "Responsive design",
+          ],
           fullDesc:
-            "We combine web development with search, analytics, and digital advertising tools. Available plans may include initial SEO, Google Search Console, Google Analytics, campaign setup, and tracking pixels to measure and improve performance.",
+            "We build modern web experiences using current technologies and strong practices for design, performance, accessibility, and responsive behavior.",
+          features: [
+            {
+              title: "Custom design",
+              description:
+                "We create a visual direction aligned with your brand identity, requirements, and business objectives.",
+            },
+            {
+              title: "SEO-ready development",
+              description:
+                "We prepare the site's structure to support indexing and provide a stronger technical foundation for search engines.",
+            },
+            {
+              title: "Maintenance and support",
+              description:
+                "We provide ongoing support to keep your website updated, stable, and working correctly.",
+            },
+          ],
+        },
+        {
+          n: "06",
+          title: "Content Marketing",
+          desc:
+            "We create relevant, high-quality content to attract and retain your audience.",
+          benefits: [
+            "Improved SEO",
+            "More traffic",
+            "Better engagement",
+          ],
+          fullDesc:
+            "We build a content strategy around your audience, objectives, and channels to create useful pieces that attract, inform, and maintain user interest.",
+          features: [
+            {
+              title: "Content creation",
+              description:
+                "We produce articles, posts, videos, and other formats tailored to your strategy and communication needs.",
+            },
+            {
+              title: "Content distribution",
+              description:
+                "We publish and distribute content across multiple channels to extend reach and maximize the value of each piece.",
+            },
+            {
+              title: "Analysis and refinement",
+              description:
+                "We evaluate content performance and refine the strategy over time to improve results.",
+            },
+          ],
         },
       ],
     },
@@ -678,11 +983,32 @@ export const dictionaries = {
     },
 
     servicesPage: {
-      eyebrow: "Our Solutions",
-      titlePart1: "Options created to grow your ",
-      titlePart2: "business.",
+      eyebrow: "Services",
+      titlePart1: "A digital strategy with",
+      titlePart2: "more possibilities.",
       desc:
-        "Choose the alternative that best matches the current stage of your project. Every package includes professional development, online service, and transparent pricing.",
+        "Explore the six core areas where we can support your brand. Select any card to review the service benefits, approach, and key features.",
+      cardAction: "View information",
+      detailEyebrow: "Service details",
+      benefitsTitle: "Benefits",
+      featuresTitle: "What we work on",
+      pricingEyebrow: "Available plans",
+      pricingTitle: "Ready to compare options and pricing?",
+      pricingDesc:
+        "Browse our 18 available packages, compare scopes, and add the option that best fits your project to the cart.",
+      pricingButton: "View pricing and packages",
+    },
+
+    pricingPage: {
+      eyebrow: "Pricing",
+      titlePart1: "Packages ready to",
+      titlePart2: "hire.",
+      desc:
+        "Review the available options, compare features, and open each plan to see its full scope before adding it to your cart.",
+      catalogTitle: "Explore Nexiumlab packages",
+      catalogDesc:
+        "All amounts are shown in Mexican pesos before applicable tax (IVA). Open any card to review the complete plan details.",
+      backToServices: "Back to services",
     },
 
     customPayment: {
