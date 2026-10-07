@@ -19,7 +19,7 @@ export const dictionaries = {
       cta: "Cuéntanos sobre tu proyecto",
       cartAria: "Mostrar carrito",
       menuAria: "Mostrar navegación",
-      contactEmail: "hola@devion.com.mx",
+      contactEmail: "consulta@nexiumlab.com.mx",
       servicesMenuEyebrow: "Servicios base",
       servicesMenuTitle: "Elige una categoría y consulta los planes disponibles",
       servicesMenuAll: "Ver todos los servicios",
@@ -35,7 +35,7 @@ export const dictionaries = {
       contactEyebrow: "Escríbenos",
       addressEyebrow: "Nuestra ubicación",
       addressText:
-        "Boulevard Adolfo López Mateos 2165, Interior 607A Oficina 607A-B Piso 6, Colonia Los Alpes, Alcaldía Álvaro Obregón, C.P. 01010, Ciudad de México",
+        "José María Ibarrarán 47, col. San José Insurgentes, Benito Juárez, C.P. 03900, Ciudad de México",
       copyright:
         "© 2026 Nexiumlab — Desarrollado con propósito desde México.",
       studio: "Agencia digital",
@@ -106,12 +106,11 @@ export const dictionaries = {
       ctaBtn: "Descubrir más",
       servicesIncludedEyebrow: "Podemos ayudarte con",
       servicesList: [
-        "Marketing en Redes Sociales",
-        "SEO y posicionamiento",
-        "Publicidad Digital",
-        "Email Marketing",
-        "Desarrollo Web",
-        "Content Marketing",
+        "Creación de sitios web",
+        "Desarrollo de tiendas digitales",
+        "Plataformas web a medida",
+        "Creación de identidad digital",
+        "Optimización y evolución de sitios",
       ],
       deliveredBadgeNum: "+200",
       deliveredBadgeText: "proyectos finalizados",
@@ -497,6 +496,288 @@ export const dictionaries = {
       backToServices: "Volver a servicios",
     },
 
+
+    legal: {
+      eyebrow: "Información legal",
+      privacy: {
+        title: "Aviso de privacidad",
+        sections: [
+          {
+            title: "",
+            body: [
+              "En cumplimiento con lo previsto en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (la “Ley”), su reglamento y los lineamientos aplicables, le informamos lo siguiente:",
+              "SUMIMAX MASTER COMMERCE, S.A. de C.V. (en adelante, “NexiumLab”), con domicilio en la Ciudad de México, será responsable de recabar sus datos personales, así como del uso y protección de los mismos y de aquellos datos recabados por sus controladoras, subsidiarias o filiales, o por terceros contratados para prestar servicios en nombre de NexiumLab, de conformidad con el presente aviso de privacidad (el “Aviso de Privacidad”).",
+            ],
+          },
+          {
+            title: "Datos Personales Recabados",
+            body: [
+              "En virtud de su relación comercial existente o futura con NexiumLab, usted podría proporcionarnos algunos de los siguientes datos personales:",
+              "Datos de identificación y contacto: Nombre completo y correo electrónico.",
+              "NexiumLab NO recaba datos considerados sensibles, los cuales requieren un nivel de protección especial debido al riesgo que su tratamiento indebido puede representar para la privacidad y los derechos de las personas.",
+            ],
+          },
+          {
+            title: "Finalidades del Tratamiento de Datos Personales",
+            body: [
+              "Los datos personales serán utilizados para las siguientes finalidades principales:",
+              "Verificación de identidad: Confirmar la identidad de los usuarios para prevenir fraudes y asegurar que las transacciones se realicen de manera segura.",
+              "Cumplimiento normativo: Asegurarnos de cumplir con las regulaciones locales e internacionales, como las leyes contra el lavado de dinero (AML) y conocer a tu cliente (KYC).",
+              "Transacciones: Facilitar la compra, venta y transferencia de los Servicios que ofrece NexiumLab, asegurando que las transacciones se procesen de manera eficiente y segura.",
+              "Servicio al cliente: Proporcionar soporte a los usuarios, resolver problemas y responder a consultas.",
+              "Marketing y comunicación: Enviar información relevante sobre actualizaciones del servicio, promociones y otras comunicaciones relacionadas, siempre que se cuente con el consentimiento del usuario.",
+              "Análisis y mejoras: Analizar el comportamiento de los usuarios y el uso del sitio para mejorar los servicios ofrecidos, identificar áreas de mejora y desarrollar nuevas funcionalidades.",
+              "Prevención de actividades ilícitas: Monitorear las transacciones y actividades de los usuarios para detectar y prevenir actividades sospechosas o ilegales.",
+              "Además, NexiumLab podrá utilizar sus datos personales para las siguientes finalidades secundarias:",
+              "Fines estadísticos.",
+              "Invitarle a participar en eventos, capacitaciones y promociones de NexiumLab.",
+              "Fines publicitarios.",
+            ],
+          },
+          {
+            title: "Recopilación de Datos Personales",
+            body: [
+              "Podemos recabar sus datos personales de distintas formas: cuando usted nos los proporciona directamente o cuando obtenemos información a través de otras fuentes permitidas por la Ley, cumpliendo en todo momento con las finalidades señaladas en el Aviso de Privacidad.",
+            ],
+          },
+          {
+            title: "Protección de Datos de Menores",
+            body: [
+              "NexiumLab NO recabará datos personales directamente de menores de 18 años. Solo podrán dar consentimiento de los datos recabados personas mayores de 18 años. Se recomienda que los padres/tutores revisen y monitoreen regularmente el uso del correo electrónico y otras actividades en línea de sus hijos(as) para que no compartan información personal identificable sin su consentimiento previo. En cualquier momento, usted puede solicitar que eliminemos cualquier dato personal de sus hijos enviándonos una solicitud a la siguiente dirección de correo electrónico: consulta@nexiumlab.com.mx.",
+            ],
+          },
+          {
+            title: "Transferencia de Datos Personales",
+            body: [
+              "Sus datos personales podrán ser transferidos a empresas controladoras, subsidiarias, afiliadas o cualquier otra perteneciente a NexiumLab, en México o en el extranjero; a terceros, nacionales o extranjeros, para el cumplimiento de las finalidades antes mencionadas, o cuando dicha comunicación de datos esté prevista en una Ley o Tratado, o bien, cuando sea requerido por la autoridad competente.",
+              "Procuraremos que dichos terceros mantengan medidas de seguridad adecuadas para resguardar sus datos personales y que los utilicen exclusivamente para las finalidades para las cuales fueron recabados y de conformidad con el presente Aviso de Privacidad. No cederemos ni transferiremos sus datos a terceros no relacionados con la empresa, salvo en los casos antes citados y los previstos en la Ley.",
+            ],
+          },
+          {
+            title: "Medidas de Seguridad",
+            body: [
+              "Implementaremos las medidas de seguridad técnicas, administrativas y físicas necesarias para procurar la integridad de sus datos personales y evitar su daño, pérdida, alteración, destrucción o uso, acceso o tratamiento no autorizado. Solo el personal autorizado, que ha cumplido con los requisitos de confidencialidad, podrá participar en su tratamiento.",
+              "El personal autorizado tiene prohibido permitir el acceso de personas no autorizadas y utilizar sus datos personales para fines distintos a los establecidos en el presente Aviso de Privacidad. La obligación de confidencialidad subsiste aún después de terminada la relación con NexiumLab.",
+            ],
+          },
+          {
+            title: "",
+            body: [
+              "Claro, aquí tienes un resumen de una política de cookies:",
+            ],
+          },
+          {
+            title: "¿Qué son las cookies?",
+            body: [
+              "Las cookies son pequeños archivos de texto que se almacenan en su dispositivo cuando visita un sitio web. Se utilizan para mejorar su experiencia en el sitio web, recordar sus preferencias y proporcionar datos analíticos sobre su comportamiento en el sitio.",
+            ],
+          },
+          {
+            title: "Tipos de cookies que utilizamos:",
+            body: [
+              "Cookies esenciales: Necesarias para el funcionamiento básico del sitio web. Sin estas cookies, algunas partes del sitio no funcionarían correctamente.",
+              "Cookies de rendimiento: Recopilan información sobre cómo los visitantes usan el sitio, como las páginas que visitan con más frecuencia. Estos datos ayudan a mejorar la funcionalidad y rendimiento del sitio.",
+              "Cookies de funcionalidad: Permiten al sitio web recordar las elecciones que usted hace (como su nombre de usuario, idioma o región) y proporcionar características mejoradas y más personales.",
+              "Cookies de publicidad: Se utilizan para mostrar anuncios que son relevantes para usted según sus intereses. También limitan el número de veces que ve un anuncio y ayudan a medir la eficacia de las campañas publicitarias.",
+              "Usted puede controlar y gestionar las cookies de diversas maneras:",
+              "Configuración del navegador: Puede configurar su navegador para aceptar o rechazar cookies, o para que le avise cuando se envíe una cookie. Consulte las instrucciones de su navegador para obtener más detalles.",
+              "Herramientas de gestión de cookies: Algunos sitios web proporcionan herramientas específicas para gestionar las cookies directamente desde el sitio.",
+              "Si decide desactivar las cookies, algunas funcionalidades del sitio pueden verse afectadas, lo que puede resultar en una experiencia menos optimizada. Por ejemplo, es posible que no pueda acceder a ciertas áreas del sitio o que algunas de las preferencias que ha guardado anteriormente no se recuerden.",
+            ],
+          },
+          {
+            title: "Derechos del Titular",
+            body: [
+              "Usted tiene derecho a acceder a sus datos personales que poseemos y a los detalles del tratamiento de estos, así como a rectificarlos en caso de ser inexactos o incompletos, cancelarlos cuando considere que no se requieren para alguna de las finalidades señaladas en el presente Aviso de Privacidad o estén siendo utilizados para finalidades no consentidas, y oponerse al tratamiento de los mismos para fines específicos o limitar su uso o divulgación.",
+              "Para ejercitar estos derechos, es necesario presentar una solicitud dirigida al Departamento de Datos Personales al siguiente correo electrónico: consulta@nexiumlab.com.mx, incluyendo:",
+              "Nombre del Titular y medio para comunicarle la respuesta a su solicitud.",
+              "Documentos que acrediten la identidad (credencial para votar con fotografía, pasaporte, cartilla militar o licencia de conducir), escaneada, y en caso de ser persona moral, los documentos que acrediten la representación legal del Titular (mediante Escritura Pública que muestre las facultades para llevar a cabo el acto).",
+              "Descripción clara y precisa de los datos personales respecto de los que se busca ejercer alguno de los derechos.",
+              "Cualquier otro elemento o documento que facilite la localización de los datos personales.",
+              "La respuesta a su solicitud se dará, a su elección, por medio de correo electrónico. NexiumLab tendrá un plazo de veinte días hábiles, contados desde la fecha en que se recibió la solicitud o a partir de que el Titular solventó el requerimiento de información, para comunicarle si la misma es procedente. En caso afirmativo, se hará efectiva dentro de los quince días siguientes a la fecha en que se comunique la respuesta. Los plazos podrán ser ampliados una sola vez por un periodo igual cuando esté justificado.",
+              "Para conocer más a fondo los requisitos de las solicitudes, procedencia de estas o formularios, puede contactar al Departamento de Datos Personales directamente en el domicilio de la empresa o a la dirección de correo: consulta@nexiumlab.com.mx.",
+            ],
+          },
+          {
+            title: "Revocación del Consentimiento",
+            body: [
+              "En cualquier momento, usted tiene derecho a revocar el consentimiento para el tratamiento de sus datos personales, para lo cual deberá presentar su solicitud conforme al procedimiento y requisitos señalados en los párrafos anteriores.",
+            ],
+          },
+          {
+            title: "Modificaciones al Aviso de Privacidad",
+            body: [
+              "NexiumLab se reserva el derecho de modificar en cualquier momento el presente Aviso de Privacidad para cumplir con actualizaciones legislativas, jurisprudenciales, políticas internas, nuevos requisitos para la prestación de servicios o cualquier otra causa. Cualquier modificación, así como el documento actualizado, estará disponible en las plataformas o instalaciones en que sea utilizado.",
+            ],
+          },
+          {
+            title: "Legislación Aplicable",
+            body: [
+              "El presente Aviso de Privacidad y el manejo que haga NexiumLab de sus datos personales se rigen por la legislación vigente y aplicable en los Estados Unidos Mexicanos, por lo que cualquier controversia que se suscite con motivo de su aplicación deberá ventilarse ante los órganos jurisdiccionales competentes en la Ciudad de México.",
+            ],
+          },
+        ],
+      },
+      terms: {
+        title: "Términos y condiciones",
+        sections: [
+          {
+            title: "",
+            body: [
+              "SUMIMAX MASTER COMMERCE, S.A. de C.V. (en lo sucesivo “NexiumLab”), es una persona moral debidamente constituida conforme a las leyes mercantiles mexicanas, con domicilio en la Ciudad de México. Pone a su disposición los presentes Términos y Condiciones (en lo sucesivo los “Términos”) del Sitio Web con dominio https://only￾digital.com/ (en lo sucesivo el “Sitio”).",
+            ],
+          },
+          {
+            title: "Aceptación de Términos",
+            body: [
+              "Para utilizar el presente Sitio es requerida la aceptación expresa por parte del Usuario de todas y cada una de las cláusulas de los presentes Términos y Condiciones.",
+              "NexiumLab se reserva el derecho de efectuar sin previo aviso las modificaciones que considere oportunas, pudiendo cambiar, suprimir o añadir tanto los contenidos, productos y servicios que se presten a través de este, como la forma en la que éstos aparezcan presentados o localizados en dicho Sitio.",
+            ],
+          },
+          {
+            title: "Objeto de los Términos",
+            body: [
+              "NexiumLab tiene como actividad principal proveer todo tipo de servicios relacionados con el desarrollo de estrategias personalizadas que generen resultados medibles y sostenibles, impulsando la visibilidad y el éxito de tu marca en un entorno altamente competitivo (los “Servicio”). A través del Sitio, los Usuarios acceden y pueden hacer uso de los diversos Servicios y contenidos puestos a su disposición. Las cláusulas de los presentes Términos y Condiciones se aplicarán a todos los servicios en el Sitio, cuyas características específicas vienen determinadas en el Sitio.",
+            ],
+          },
+          {
+            title: "Pago de los Servicios",
+            body: [
+              "Formas de Pago Aceptadas:",
+              "Los servicios de NexiumLab solo pueden ser pagados mediante tarjeta de crédito o débito.",
+              "No se aceptan pagos en efectivo, cheques, transferencias bancarias, o cualquier otra forma de pago que no sea una tarjeta de crédito o débito.",
+              "Proveedor de Servicios de Pago:",
+              "Los pagos serán procesados por un proveedor de servicios de pago autorizado, que será designado por NexiumLab.",
+              "La empresa no tiene control sobre el proveedor de servicios de pago, pero se compromete a trabajar con proveedores confiables y seguros.",
+              "Información de Pago:",
+              "Para realizar un pago, los usuarios deben proporcionar la información de su tarjeta de crédito o débito, incluyendo el número de la tarjeta, el nombre del titular, la fecha de vencimiento y el código de seguridad (CVV).",
+              "NexiumLab no almacena ni guarda la información de pago de los usuarios. Esta información es transmitida directamente al proveedor de servicios de pago para su procesamiento.",
+              "Verificación de Pagos:",
+              "NexiumLab se reserva el derecho de verificar la información de pago proporcionada por los usuarios antes de procesar el pago.",
+              "Si la información de pago no es verificada correctamente, el pago puede ser rechazado y el usuario será notificado.",
+            ],
+          },
+          {
+            title: "Responsabilidades",
+            body: [
+              "Del portal: NexiumLab NO se hará responsable, directa ni subsidiariamente, de:",
+              "Resultados No Garantizados: NexiumLab no se hace responsable por la falta de resultados específicos en las campañas de marketing, ya que los resultados pueden variar según múltiples factores externos, como el comportamiento del mercado y la competencia.",
+              "Errores en la Información Proporcionada: La empresa no asume responsabilidad por errores o inexactitudes en la información proporcionada por el cliente o terceros que puedan afectar las campañas de marketing.",
+              "Interrupciones del Servicio: No se responsabiliza por interrupciones en los servicios de internet o plataformas de terceros que puedan afectar la ejecución de las campañas.",
+              "Cambios en Algoritmos: NexiumLab no es responsable por cambios en los algoritmos de plataformas de publicidad o redes sociales que puedan impactar el rendimiento de las campañas.",
+              "Fuerza Mayor: La empresa no se hace responsable por daños o pérdidas resultantes de eventos fuera de su control, como desastres naturales, guerras, o pandemias.",
+              "Dependencia de Terceros: No se asume responsabilidad por la calidad o disponibilidad de servicios proporcionados por terceros, como proveedores de software o plataformas publicitarias.",
+              "Si NexiumLab llevara a cabo un cambio en las presentes cláusulas que aún no hubieran sido informadas en el Sitio, se notificará a los Usuarios en el plazo más breve posible por comunicación personal o a través de la actualización de los contenidos del Sitio.",
+              "Del Usuario: El Usuario será responsable:",
+              "Información Proporcionada: Los usuarios deben asegurarse de proporcionar información precisa y completa a NexiumLab para el desarrollo efectivo de las campañas de marketing. Son responsables de cualquier error u omisión en los datos que suministren.",
+              "Uso Apropiado de los Servicios: Los usuarios deben utilizar los servicios de marketing de manera apropiada, cumpliendo con las leyes aplicables y sin infringir derechos de terceros. No pueden emplear los servicios para actividades ilegales o dañinas.",
+              "Pago Oportuno: Los usuarios son responsables de realizar los pagos acordados por los servicios de marketing en las fechas estipuladas. El incumplimiento de los términos de pago puede conllevar la suspensión o terminación de los servicios.",
+              "Protección de Datos: Los usuarios deben proteger adecuadamente los datos personales y confidenciales a los que tengan acceso a través de los servicios de NexiumLab. No pueden hacer un uso indebido o no autorizado de dicha información.",
+              "Cooperación con NexiumLab: Los usuarios tienen la responsabilidad de cooperar con NexiumLab, proporcionando oportunamente la información y el apoyo necesarios para la ejecución exitosa de las campañas de marketing contratadas..",
+            ],
+          },
+          {
+            title: "Propiedad Intelectual e Industrial",
+            body: [
+              "La totalidad del Sitio, que incluye texto, imágenes, marcas, gráficos, logotipos, botones, archivos de software, combinaciones de colores, así como la estructura, selección, ordenación y presentación de sus contenidos, se encuentra protegida por las leyes sobre Propiedad Intelectual e Industrial de México, quedando prohibida su reproducción, distribución, comunicación pública y transformación, salvo para uso personal y privado.",
+              "NexiumLab no garantiza que los contenidos sean precisos o libres de error o que el uso de estos por el usuario no infrinja los derechos de terceras partes. El buen o mal uso de esta Web y de sus contenidos está bajo la responsabilidad del usuario.",
+              "Queda prohibida la reproducción, retransmisión, copia, cesión o redifusión, total o parcial, de la información contenida en estas páginas, cualquiera que fuera su finalidad y el medio utilizado para ello, así como de los productos adquiridos a través del Sitio.",
+            ],
+          },
+          {
+            title: "Protección de Datos Personales",
+            body: [
+              "NexiumLab se compromete a proteger la privacidad y los datos personales de todos los usuarios que visiten y utilicen su sitio web, de acuerdo a lo establecido en la Política de Privacidad de la empresa.",
+              "La Política de Privacidad, accesible en la sección correspondiente del sitio web, detalla:",
+              "Qué información personal recopilamos de los usuarios y cómo la obtenemos",
+              "Cómo utilizamos y procesamos los datos personales",
+              "Con quién compartimos la información personal, si fuera necesario",
+              "Cómo almacenamos y protegemos los datos personales",
+              "Los derechos de los usuarios sobre sus datos personales",
+              "Cómo pueden los usuarios contactarnos para ejercer sus derechos o hacer consultas",
+              "NexiumLab cumple con las leyes y regulaciones aplicables en materia de protección de datos personales dentro de México. Los usuarios pueden acceder a la Política de Privacidad en cualquier momento a través del enlace disponible en el sitio web. Al utilizar los servicios de NexiumLab, los usuarios aceptan los términos de la Política de Privacidad.",
+            ],
+          },
+          {
+            title: "Uso de Tecnologías Cookies",
+            body: [
+              "NexiumLab se reserva el derecho de utilización de las denominadas “cookies” en cualquier tipo de utilización del Sitio. No obstante, se informa a los Usuarios de la posibilidad de gestionar sus preferencias de cookies en su navegador y rechazar la utilización de cookies si así lo desean. Para más información, consulte nuestra Política de Cookies disponible en el Sitio.",
+            ],
+          },
+          {
+            title: "Enlaces o Links",
+            body: [
+              "El Sitio puede incluir enlaces o links a sitios de terceros. Las antedichas webs no han sido revisadas ni son objeto de controles sobre los mismos por el Sitio. NexiumLab no podrá ser considerada en ningún caso responsable de los contenidos de estos sitios Web ni de las medidas que se adopten relativas a su privacidad o al tratamiento de sus datos de carácter personal. NexiumLab recomienda la lectura detenida de las condiciones de uso y la política de privacidad de estos sitios.",
+              "En caso de estar interesado en activar un enlace al Sitio, deberá comunicarlo a NexiumLab, obteniendo el consentimiento expreso para crear el enlace. NexiumLab se reserva el derecho de oposición a la activación de enlaces con su sitio Web.",
+            ],
+          },
+          {
+            title: "Jurisdicción y Ley Aplicable",
+            body: [
+              "Las cláusulas de los presentes Términos y Condiciones se encuentran sometidas a la legislación mexicana vigente. Para cualquier tipo de controversia derivada de la utilización de los servicios ofrecidos o productos ofertados en el Sitio, las partes, con la aceptación de estos Términos y Condiciones, se someterán a los Tribunales y Juzgados competentes de la Ciudad de México, salvo que una Ley establezca un fuero diferente, en atención a la naturaleza de la relación.",
+            ],
+          },
+          {
+            title: "Contacto",
+            body: [
+              "Para cualquier consulta, solicitud de información, reportar problemas técnicos o cualquier otro asunto relacionado con nuestros servicios, puede contactarnos por correo electrónico a consulta@nexiumlab.com.mx.",
+            ],
+          },
+        ],
+      },
+      refunds: {
+        title: "Política de Devoluciones, Reembolsos y Cancelación",
+        sections: [
+          {
+            title: "",
+            body: [
+              "SUMIMAX MASTER COMMERCE, S.A. de C.V. (en adelante, “NexiumLab”), pone a su disposición la presente Política de Devoluciones, Reembolsos y Cancelación, en caso de no estar completamente satisfecho con su compra, estamos aquí para asistirle.",
+              "***Al realizar una compra con nosotros, aceptas estar sujeto a nuestra Política de Devoluciones y Reembolsos, diseñada para garantizar que su experiencia sea justa y transparente.",
+              "Esta política puede ser modificada o actualizada en función de nuevos requisitos legales, nuestras necesidades de productos o servicios, cambios en nuestras prácticas de privacidad, o por otras razones. Cualquier cambio a esta política se comunicará a los clientes a través de nuestro sitio web.",
+            ],
+          },
+          {
+            title: "DE LAS DEVOLUCIONES",
+            body: [
+              "Aceptamos devoluciones dentro de los 10 días naturales siguientes a la recepción del servicio, en caso de que esté presente defectos o no cumpla con lo solicitado.",
+              "Para comenzar con el proceso, favor de contactar con nuestro servicio de atención al cliente a través de los datos proporcionados en nuestro sitio web para iniciar el proceso de devolución",
+              "Para procesar su devolución, necesitamos un recibo o comprobante de compra. Todas las devoluciones deben incluir una declaración escrita que detalle los motivos de la devolución.",
+              "Las devoluciones se aceptan únicamente para servicios que presenten defectos de ejecución. Es fundamental que nos informes sobre cualquier defecto en el servicio para ofrecerte una solución adecuada.",
+              "Las devoluciones de productos digitales solo se aceptarán en casos de entrega incorrecta o dañada. Si experimenta algún problema con un producto digital, notifíquenos de inmediato para que podamos resolverlo lo antes posible.",
+            ],
+          },
+          {
+            title: "REEMBOLSOS",
+            body: [
+              "Los reembolsos se procesarán una vez que recibamos y verifiquemos la elegibilidad del servicio para el reembolso. Nos reservamos el derecho de rechazar un reembolso si los servicios devueltos no cumplen con las condiciones mencionadas.",
+              "Una vez que recibamos e inspeccionamos su devolución, te enviaremos un correo electrónico notificando que hemos recibido el artículo devuelto. En el correo, te informaremos si su devolución ha sido aprobada o rechazada.",
+              "Si su devolución es aprobada, procederemos el reembolso a su método de pago original. El tiempo para recibir el reembolso dependerá de la política de la entidad emisora de su",
+              "Los reembolsos están sujetos a evaluación y pueden variar según el tipo de servicio o producto adquirido. Para servicios que requieran pagos parciales o en etapas, los reembolsos estarán sujetos a las etapas completadas y aprobadas.",
+              "Exclusiones de reembolsos:",
+              "No se otorgarán reembolsos si el cliente ha incumplido los Términos y Condiciones de NexiumLab.",
+              "No se otorgarán reembolsos si el cliente ha proporcionado información incorrecta o insuficiente que haya afectado la prestación del servicio.",
+              "Los servicios o productos que hayan sido utilizados, modificados o alterados después de la entrega no serán elegibles para reembolso, a menos que exista un defecto inherente que lo haga inadecuado para el propósito previsto.",
+            ],
+          },
+          {
+            title: "DE LOS SERVICIOS Y SU CANCELACIÓN",
+            body: [
+              "Es importante considerar lo siguiente en caso de querer cancelar algún servicio con nosotros:",
+              "No aplicamos cargos automáticos, preautorizados o recurrentes. Esto significa que deberás realizar el pago correspondiente para cada periodo en el que desees utilizar nuestros servicios, lo que te otorga control total sobre sus pagos.",
+              "Al finalizar el periodo contratado, mantendremos su servicio activo durante 5 (cinco) días adicionales. Este tiempo extra te ofrece la oportunidad de renovar el servicio para un nuevo periodo sin interrupciones. Si no renuevas el servicio al finalizar estos 5 (cinco) días, el servicio será suspendido hasta que se realice el pago correspondiente.",
+              "Esto proporciona flexibilidad y control sobre su suscripción, asegurando que solo pagues por los periodos en los que realmente necesitas el servicio.",
+            ],
+          },
+          {
+            title: "CONTACTO",
+            body: [
+              "Si tienes alguna duda o inquietud respecto a esta política o cualquier otro aspecto de nuestros servicios, no dudes en ponerte en contacto con nuestro equipo de atención al cliente. Puede comunicarse con nosotros a través de correo electrónico enviando un correo a consulta@nexiumlab.com.mx.",
+            ],
+          },
+        ],
+      },
+    },
+
     customPayment: {
       title1: "Gestiona tu",
       title2: "Pago personalizado",
@@ -535,7 +816,7 @@ export const dictionaries = {
       cta: "Tell us about your project",
       cartAria: "Show shopping cart",
       menuAria: "Show navigation",
-      contactEmail: "hola@devion.com.mx",
+      contactEmail: "consulta@nexiumlab.com.mx",
       servicesMenuEyebrow: "Core services",
       servicesMenuTitle: "Choose a category and browse the available plans",
       servicesMenuAll: "View all services",
@@ -551,7 +832,7 @@ export const dictionaries = {
       contactEyebrow: "Get in Touch",
       addressEyebrow: "Our Location",
       addressText:
-        "Boulevard Adolfo López Mateos 2165, Interior 607A Oficina 607A-B Piso 6, Colonia Los Alpes, Alcaldía Álvaro Obregón, C.P. 01010, Ciudad de México",
+        "José María Ibarrarán 47, col. San José Insurgentes, Benito Juárez, C.P. 03900, Ciudad de México",
       copyright:
         "© 2026 Nexiumlab — Built with purpose in Mexico.",
       studio: "Digital Agency",
@@ -622,12 +903,11 @@ export const dictionaries = {
       ctaBtn: "Discover more",
       servicesIncludedEyebrow: "We can help with",
       servicesList: [
-        "Social Media Marketing",
-        "SEO and search visibility",
-        "Digital Advertising",
-        "Email Marketing",
-        "Web Development",
-        "Content Marketing",
+        "Website creation",
+        "Online store development",
+        "Custom web platforms",
+        "Digital identity creation",
+        "Website optimization and evolution",
       ],
       deliveredBadgeNum: "+200",
       deliveredBadgeText: "completed projects",
@@ -1011,6 +1291,288 @@ export const dictionaries = {
       catalogDesc:
         "All amounts are shown in Mexican pesos before applicable tax (IVA). Open any card to review the complete plan details.",
       backToServices: "Back to services",
+    },
+
+
+    legal: {
+      eyebrow: "Legal information",
+      privacy: {
+        title: "Privacy Notice",
+        sections: [
+          {
+            title: "",
+            body: [
+              "In compliance with the Federal Law on Protection of Personal Data Held by Private Parties (the “Law”), its regulations, and the applicable guidelines, we inform you of the following:",
+              "SUMIMAX MASTER COMMERCE, S.A. de C.V. (hereinafter, “NexiumLab”), with domicile in Mexico City, will be responsible for collecting your personal data, as well as for its use and protection and for data collected by its controlling companies, subsidiaries or affiliates, or by third parties hired to provide services on behalf of NexiumLab, in accordance with this privacy notice (the “Privacy Notice”).",
+            ],
+          },
+          {
+            title: "Personal Data Collected",
+            body: [
+              "By virtue of your existing or future commercial relationship with NexiumLab, you may provide us with some of the following personal data:",
+              "Identification and contact data: Full name and email address.",
+              "NexiumLab DOES NOT collect data considered sensitive, which requires a special level of protection due to the risk that improper processing may represent to the privacy and rights of individuals.",
+            ],
+          },
+          {
+            title: "Purposes of Personal Data Processing",
+            body: [
+              "Personal data will be used for the following primary purposes:",
+              "Identity verification: Confirm users' identity to prevent fraud and ensure that transactions are carried out securely.",
+              "Regulatory compliance: Ensure compliance with local and international regulations, such as anti-money laundering (AML) and know your customer (KYC) laws.",
+              "Transactions: Facilitate the purchase, sale, and transfer of the Services offered by NexiumLab, ensuring that transactions are processed efficiently and securely.",
+              "Customer service: Provide support to users, resolve issues, and respond to inquiries.",
+              "Marketing and communication: Send relevant information about service updates, promotions, and other related communications, provided that the user's consent has been obtained.",
+              "Analysis and improvements: Analyze user behavior and site usage to improve the services offered, identify areas for improvement, and develop new functionality.",
+              "Prevention of unlawful activities: Monitor user transactions and activities to detect and prevent suspicious or illegal activities.",
+              "In addition, NexiumLab may use your personal data for the following secondary purposes:",
+              "Statistical purposes.",
+              "Invite you to participate in NexiumLab events, training, and promotions.",
+              "Advertising purposes.",
+            ],
+          },
+          {
+            title: "Collection of Personal Data",
+            body: [
+              "We may collect your personal data in different ways: when you provide it to us directly or when we obtain information through other sources permitted by the Law, at all times complying with the purposes stated in the Privacy Notice.",
+            ],
+          },
+          {
+            title: "Protection of Minors' Data",
+            body: [
+              "NexiumLab WILL NOT directly collect personal data from persons under 18 years of age. Only persons over 18 years of age may provide consent regarding collected data. Parents/guardians are advised to regularly review and monitor their children's use of email and other online activities so that they do not share personally identifiable information without prior consent. At any time, you may request that we delete any personal data of your children by sending a request to the following email address: consulta@nexiumlab.com.mx.",
+            ],
+          },
+          {
+            title: "Transfer of Personal Data",
+            body: [
+              "Your personal data may be transferred to controlling companies, subsidiaries, affiliates, or any other company belonging to NexiumLab, in Mexico or abroad; to national or foreign third parties for compliance with the purposes mentioned above, or when such communication of data is provided for in a Law or Treaty, or when required by the competent authority.",
+              "We will seek to ensure that such third parties maintain adequate security measures to safeguard your personal data and use it exclusively for the purposes for which it was collected and in accordance with this Privacy Notice. We will not assign or transfer your data to third parties unrelated to the company, except in the cases mentioned above and those provided for by the Law.",
+            ],
+          },
+          {
+            title: "Security Measures",
+            body: [
+              "We will implement the technical, administrative, and physical security measures necessary to seek to preserve the integrity of your personal data and prevent damage, loss, alteration, destruction, or unauthorized use, access, or processing. Only authorized personnel who have complied with confidentiality requirements may participate in its processing.",
+              "Authorized personnel are prohibited from allowing access to unauthorized persons and from using your personal data for purposes other than those established in this Privacy Notice. The confidentiality obligation remains in effect even after the relationship with NexiumLab has ended.",
+            ],
+          },
+          {
+            title: "",
+            body: [
+              "Of course, here is a summary of a cookie policy:",
+            ],
+          },
+          {
+            title: "What are cookies?",
+            body: [
+              "Cookies are small text files stored on your device when you visit a website. They are used to improve your experience on the website, remember your preferences, and provide analytical data about your behavior on the site.",
+            ],
+          },
+          {
+            title: "Types of cookies we use:",
+            body: [
+              "Essential cookies: Necessary for the basic operation of the website. Without these cookies, some parts of the site would not function properly.",
+              "Performance cookies: Collect information about how visitors use the site, such as the pages they visit most often. This data helps improve site functionality and performance.",
+              "Functionality cookies: Allow the website to remember choices you make (such as your username, language, or region) and provide enhanced and more personalized features.",
+              "Advertising cookies: Used to display ads that are relevant to you based on your interests. They also limit the number of times you see an ad and help measure the effectiveness of advertising campaigns.",
+              "You can control and manage cookies in several ways:",
+              "Browser settings: You can configure your browser to accept or reject cookies, or to notify you when a cookie is sent. Consult your browser instructions for more details.",
+              "Cookie management tools: Some websites provide specific tools to manage cookies directly from the site.",
+              "If you decide to disable cookies, some site functionality may be affected, which may result in a less optimized experience. For example, you may not be able to access certain areas of the site or some previously saved preferences may not be remembered.",
+            ],
+          },
+          {
+            title: "Data Subject Rights",
+            body: [
+              "You have the right to access the personal data we hold and the details of its processing, as well as to rectify it if it is inaccurate or incomplete, cancel it when you consider that it is not required for any of the purposes stated in this Privacy Notice or is being used for purposes not consented to, and object to its processing for specific purposes or limit its use or disclosure.",
+              "To exercise these rights, you must submit a request addressed to the Personal Data Department at the following email address: consulta@nexiumlab.com.mx, including:",
+              "Name of the Data Subject and a means to communicate the response to the request.",
+              "Documents proving identity (photo voter ID, passport, military service card, or driver's license), scanned, and in the case of a legal entity, documents proving the Data Subject's legal representation (through a Public Deed showing the powers to carry out the act).",
+              "Clear and precise description of the personal data with respect to which any of the rights are sought to be exercised.",
+              "Any other element or document that facilitates the location of the personal data.",
+              "The response to your request will be provided, at your choice, by email. NexiumLab will have a period of twenty business days, counted from the date the request was received or from the date the Data Subject satisfied the information request, to inform you whether it is admissible. If so, it will be made effective within the following fifteen days from the date the response is communicated. The periods may be extended once for an equal period when justified.",
+              "To learn more about request requirements, admissibility, or forms, you may contact the Personal Data Department directly at the company's address or at the email address: consulta@nexiumlab.com.mx.",
+            ],
+          },
+          {
+            title: "Revocation of Consent",
+            body: [
+              "At any time, you have the right to revoke consent for the processing of your personal data, for which you must submit your request in accordance with the procedure and requirements stated in the preceding paragraphs.",
+            ],
+          },
+          {
+            title: "Modifications to the Privacy Notice",
+            body: [
+              "NexiumLab reserves the right to modify this Privacy Notice at any time to comply with legislative or judicial updates, internal policies, new requirements for the provision of services, or any other cause. Any modification, as well as the updated document, will be available on the platforms or facilities where it is used.",
+            ],
+          },
+          {
+            title: "Applicable Law",
+            body: [
+              "This Privacy Notice and NexiumLab's handling of your personal data are governed by the current and applicable legislation of the United Mexican States; therefore, any dispute arising from its application must be heard before the competent jurisdictional bodies in Mexico City.",
+            ],
+          },
+        ],
+      },
+      terms: {
+        title: "Terms and Conditions",
+        sections: [
+          {
+            title: "",
+            body: [
+              "SUMIMAX MASTER COMMERCE, S.A. de C.V. (hereinafter “NexiumLab”), is a legal entity duly incorporated under Mexican commercial laws, with domicile in Mexico City. It makes available to you these Terms and Conditions (hereinafter the “Terms”) of the Website with domain https://only￾digital.com/ (hereinafter the “Site”).",
+            ],
+          },
+          {
+            title: "Acceptance of Terms",
+            body: [
+              "To use this Site, the User's express acceptance of each and every clause of these Terms and Conditions is required.",
+              "NexiumLab reserves the right to make, without prior notice, any modifications it deems appropriate, and may change, remove, or add both the content, products, and services provided through it, as well as the way in which they appear presented or located on the Site.",
+            ],
+          },
+          {
+            title: "Purpose of the Terms",
+            body: [
+              "NexiumLab's main activity is to provide all types of services related to the development of customized strategies that generate measurable and sustainable results, boosting the visibility and success of your brand in a highly competitive environment (the “Service”). Through the Site, Users access and may use the various Services and content made available to them. The clauses of these Terms and Conditions shall apply to all services on the Site, whose specific characteristics are determined on the Site.",
+            ],
+          },
+          {
+            title: "Payment for Services",
+            body: [
+              "Accepted Payment Methods:",
+              "NexiumLab services may only be paid by credit or debit card.",
+              "Cash payments, checks, bank transfers, or any other form of payment other than a credit or debit card are not accepted.",
+              "Payment Service Provider:",
+              "Payments will be processed by an authorized payment service provider designated by NexiumLab.",
+              "The company has no control over the payment service provider, but is committed to working with reliable and secure providers.",
+              "Payment Information:",
+              "To make a payment, users must provide their credit or debit card information, including the card number, cardholder name, expiration date, and security code (CVV).",
+              "NexiumLab does not store or retain users' payment information. This information is transmitted directly to the payment service provider for processing.",
+              "Payment Verification:",
+              "NexiumLab reserves the right to verify payment information provided by users before processing payment.",
+              "If the payment information cannot be properly verified, payment may be rejected and the user will be notified.",
+            ],
+          },
+          {
+            title: "Responsibilities",
+            body: [
+              "Of the portal: NexiumLab SHALL NOT be directly or subsidiarily responsible for:",
+              "Results Not Guaranteed: NexiumLab is not responsible for the lack of specific results in marketing campaigns, as results may vary according to multiple external factors, such as market behavior and competition.",
+              "Errors in Information Provided: The company assumes no responsibility for errors or inaccuracies in information provided by the client or third parties that may affect marketing campaigns.",
+              "Service Interruptions: It is not responsible for interruptions in internet services or third-party platforms that may affect campaign execution.",
+              "Algorithm Changes: NexiumLab is not responsible for changes to advertising platform or social media algorithms that may impact campaign performance.",
+              "Force Majeure: The company is not responsible for damages or losses resulting from events beyond its control, such as natural disasters, wars, or pandemics.",
+              "Third-Party Dependency: No responsibility is assumed for the quality or availability of services provided by third parties, such as software providers or advertising platforms.",
+              "If NexiumLab makes a change to these clauses that has not yet been reported on the Site, Users will be notified as soon as possible by personal communication or through an update to the Site content.",
+              "Of the User: The User shall be responsible for:",
+              "Information Provided: Users must ensure that they provide accurate and complete information to NexiumLab for the effective development of marketing campaigns. They are responsible for any error or omission in the data they provide.",
+              "Proper Use of Services: Users must use marketing services appropriately, complying with applicable laws and without infringing third-party rights. They may not use the services for illegal or harmful activities.",
+              "Timely Payment: Users are responsible for making agreed payments for marketing services on the stipulated dates. Failure to comply with payment terms may result in suspension or termination of services.",
+              "Data Protection: Users must adequately protect personal and confidential data to which they have access through NexiumLab services. They may not make improper or unauthorized use of such information.",
+              "Cooperation with NexiumLab: Users have the responsibility to cooperate with NexiumLab, timely providing the information and support necessary for the successful execution of contracted marketing campaigns..",
+            ],
+          },
+          {
+            title: "Intellectual and Industrial Property",
+            body: [
+              "The entirety of the Site, including text, images, trademarks, graphics, logos, buttons, software files, color combinations, as well as the structure, selection, arrangement, and presentation of its content, is protected by the Intellectual and Industrial Property laws of Mexico, and its reproduction, distribution, public communication, and transformation are prohibited except for personal and private use.",
+              "NexiumLab does not guarantee that the content is accurate or error-free or that its use by the user does not infringe the rights of third parties. Proper or improper use of this Website and its content is the user's responsibility.",
+              "The reproduction, retransmission, copying, assignment, or redistribution, in whole or in part, of the information contained on these pages, regardless of its purpose and the means used, as well as of products acquired through the Site, is prohibited.",
+            ],
+          },
+          {
+            title: "Personal Data Protection",
+            body: [
+              "NexiumLab is committed to protecting the privacy and personal data of all users who visit and use its website, in accordance with the company's Privacy Policy.",
+              "The Privacy Policy, accessible in the corresponding section of the website, details:",
+              "What personal information we collect from users and how we obtain it",
+              "How we use and process personal data",
+              "With whom we share personal information, if necessary",
+              "How we store and protect personal data",
+              "Users' rights regarding their personal data",
+              "How users can contact us to exercise their rights or make inquiries",
+              "NexiumLab complies with applicable laws and regulations regarding personal data protection in Mexico. Users may access the Privacy Policy at any time through the link available on the website. By using NexiumLab services, users accept the terms of the Privacy Policy.",
+            ],
+          },
+          {
+            title: "Use of Cookie Technologies",
+            body: [
+              "NexiumLab reserves the right to use so-called “cookies” in any type of use of the Site. However, Users are informed of the possibility of managing their cookie preferences in their browser and rejecting the use of cookies if they so wish. For more information, consult our Cookie Policy available on the Site.",
+            ],
+          },
+          {
+            title: "Links",
+            body: [
+              "The Site may include links to third-party sites. The aforementioned websites have not been reviewed and are not subject to controls by the Site. NexiumLab shall under no circumstances be considered responsible for the content of these websites or for measures adopted regarding their privacy or the processing of their personal data. NexiumLab recommends carefully reading the terms of use and privacy policy of these sites.",
+              "If you are interested in activating a link to the Site, you must notify NexiumLab and obtain express consent to create the link. NexiumLab reserves the right to object to the activation of links to its Website.",
+            ],
+          },
+          {
+            title: "Jurisdiction and Applicable Law",
+            body: [
+              "The clauses of these Terms and Conditions are subject to current Mexican legislation. For any dispute arising from the use of services offered or products offered on the Site, the parties, by accepting these Terms and Conditions, will submit to the competent Courts and Tribunals of Mexico City, unless a Law establishes a different jurisdiction due to the nature of the relationship.",
+            ],
+          },
+          {
+            title: "Contact",
+            body: [
+              "For any inquiry, request for information, report of technical problems, or any other matter related to our services, you may contact us by email at consulta@nexiumlab.com.mx.",
+            ],
+          },
+        ],
+      },
+      refunds: {
+        title: "Returns, Refunds and Cancellation Policy",
+        sections: [
+          {
+            title: "",
+            body: [
+              "SUMIMAX MASTER COMMERCE, S.A. de C.V. (hereinafter, “NexiumLab”), makes this Returns, Refunds and Cancellation Policy available to you; if you are not completely satisfied with your purchase, we are here to assist you.",
+              "***By making a purchase with us, you agree to be subject to our Returns and Refunds Policy, designed to ensure that your experience is fair and transparent.",
+              "This policy may be modified or updated based on new legal requirements, our product or service needs, changes in our privacy practices, or for other reasons. Any change to this policy will be communicated to customers through our website.",
+            ],
+          },
+          {
+            title: "RETURNS",
+            body: [
+              "We accept returns within 10 calendar days following receipt of the service, in the event that it presents defects or does not comply with what was requested.",
+              "To begin the process, please contact our customer service using the information provided on our website to initiate the return process",
+              "To process your return, we need a receipt or proof of purchase. All returns must include a written statement detailing the reasons for the return.",
+              "Returns are accepted only for services that present execution defects. It is essential that you inform us of any defect in the service so that we can offer you an appropriate solution.",
+              "Returns of digital products will only be accepted in cases of incorrect or damaged delivery. If you experience any problem with a digital product, notify us immediately so that we can resolve it as soon as possible.",
+            ],
+          },
+          {
+            title: "REFUNDS",
+            body: [
+              "Refunds will be processed once we receive and verify the service's eligibility for a refund. We reserve the right to reject a refund if the returned services do not meet the stated conditions.",
+              "Once we receive and inspect your return, we will send you an email notifying you that we have received the returned item. In the email, we will inform you whether your return has been approved or rejected.",
+              "If your return is approved, we will issue the refund to your original payment method. The time to receive the refund will depend on the policy of the issuing entity of your",
+              "Refunds are subject to evaluation and may vary depending on the type of service or product purchased. For services requiring partial or staged payments, refunds will be subject to the stages completed and approved.",
+              "Refund exclusions:",
+              "No refunds will be granted if the customer has breached NexiumLab's Terms and Conditions.",
+              "No refunds will be granted if the customer has provided incorrect or insufficient information that affected the provision of the service.",
+              "Services or products that have been used, modified, or altered after delivery will not be eligible for a refund, unless there is an inherent defect that makes them unsuitable for the intended purpose.",
+            ],
+          },
+          {
+            title: "SERVICES AND THEIR CANCELLATION",
+            body: [
+              "It is important to consider the following if you wish to cancel any service with us:",
+              "We do not apply automatic, preauthorized, or recurring charges. This means that you must make the corresponding payment for each period in which you wish to use our services, giving you full control over your payments.",
+              "At the end of the contracted period, we will keep your service active for an additional 5 (five) days. This extra time gives you the opportunity to renew the service for a new period without interruptions. If you do not renew the service at the end of these 5 (five) days, the service will be suspended until the corresponding payment is made.",
+              "This provides flexibility and control over your subscription, ensuring that you only pay for the periods in which you really need the service.",
+            ],
+          },
+          {
+            title: "CONTACT",
+            body: [
+              "If you have any questions or concerns regarding this policy or any other aspect of our services, please feel free to contact our customer service team. You can contact us by email by sending a message to consulta@nexiumlab.com.mx.",
+            ],
+          },
+        ],
+      },
     },
 
     customPayment: {
