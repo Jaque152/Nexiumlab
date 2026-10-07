@@ -39,7 +39,9 @@ const INVALID_PHONE_PATTERNS = [
 function isGibberishText(text: string): boolean {
   const clean = text.trim();
 
-  if (clean.length < 2) return true;
+  if (clean.length < 2) {
+    return true;
+  }
 
   if (/https?:\/\//i.test(clean)) {
     return true;
@@ -77,8 +79,7 @@ type Fields =
   | "correo"
   | "telefono"
   | "asunto"
-  | "mensaje"
-  | "website_hp";
+  | "mensaje";
 
 type FormState = Record<Fields, string>;
 
@@ -88,7 +89,6 @@ const EMPTY: FormState = {
   telefono: "",
   asunto: "",
   mensaje: "",
-  website_hp: "",
 };
 
 // ======================================================
@@ -122,18 +122,18 @@ export function ContactForm() {
   // ======================================================
 
   const update = (
-    k: Fields,
-    v: string
+    key: Fields,
+    value: string
   ) => {
-    setForm((f) => ({
-      ...f,
-      [k]: v,
+    setForm((current) => ({
+      ...current,
+      [key]: value,
     }));
 
-    if (errors[k]) {
-      setErrors((e) => ({
-        ...e,
-        [k]: undefined,
+    if (errors[key]) {
+      setErrors((current) => ({
+        ...current,
+        [key]: undefined,
       }));
     }
   };
@@ -143,49 +143,41 @@ export function ContactForm() {
   // ======================================================
 
   const handlePhoneChange = (
-    e: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const digitsOnly =
-      e.target.value
-        .replace(/\D/g, "")
-        .slice(0, 10);
+    const digitsOnly = event.target.value
+      .replace(/\D/g, "")
+      .slice(0, 10);
 
-    update(
-      "telefono",
-      digitsOnly
-    );
+    update("telefono", digitsOnly);
   };
 
   // ======================================================
-  // VALIDAR
+  // VALIDACIÓN
   // ======================================================
 
   const validate = () => {
-    const e: Partial<FormState> = {};
+    const newErrors: Partial<FormState> = {};
 
     if (
       !form.nombre.trim() ||
       isGibberishText(form.nombre)
     ) {
-      e.nombre =
+      newErrors.nombre =
         t.contact.errName;
     }
 
     if (
-      !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
         form.correo.trim()
       )
     ) {
-      e.correo =
+      newErrors.correo =
         t.contact.errEmail;
     }
 
-    if (
-      !isValidPhone(
-        form.telefono
-      )
-    ) {
-      e.telefono =
+    if (!isValidPhone(form.telefono)) {
+      newErrors.telefono =
         lang === "es"
           ? "Teléfono inválido"
           : "Invalid phone";
@@ -195,7 +187,7 @@ export function ContactForm() {
       !form.mensaje.trim() ||
       form.mensaje.trim().length < 5
     ) {
-      e.mensaje =
+      newErrors.mensaje =
         t.contact.errMsg;
     }
 
@@ -204,16 +196,16 @@ export function ContactForm() {
         form.mensaje
       )
     ) {
-      e.mensaje =
+      newErrors.mensaje =
         lang === "es"
           ? "No se permiten enlaces"
           : "Links are not allowed";
     }
 
-    setErrors(e);
+    setErrors(newErrors);
 
     return (
-      Object.keys(e).length === 0
+      Object.keys(newErrors).length === 0
     );
   };
 
@@ -222,30 +214,23 @@ export function ContactForm() {
   // ======================================================
 
   const handleSubmit = async (
-    ev: FormEvent
+    event: FormEvent<HTMLFormElement>
   ) => {
-    ev.preventDefault();
+    event.preventDefault();
+
+    console.log(
+      "[Contact] Botón enviar presionado"
+    );
 
     if (loading) {
-      return;
-    }
-
-    // ====================================================
-    // HONEYPOT
-    // ====================================================
-
-    if (
-      form.website_hp
-    ) {
-      console.warn(
-        "[Contact] Honeypot activado."
+      console.log(
+        "[Contact] Ya existe un envío en proceso"
       );
-
       return;
     }
 
     // ====================================================
-    // PROTECCIÓN ENVÍO DEMASIADO RÁPIDO
+    // PROTECCIÓN POR TIEMPO
     // ====================================================
 
     const elapsedSeconds =
@@ -254,15 +239,13 @@ export function ContactForm() {
         mountTimeRef.current
       ) / 1000;
 
-    if (
-      elapsedSeconds < 2.5
-    ) {
-      console.warn(
-        `[Contact] Formulario enviado demasiado rápido: ${elapsedSeconds.toFixed(
-          2
-        )} segundos`
-      );
+    console.log(
+      "[Contact] Tiempo en formulario:",
+      elapsedSeconds.toFixed(2),
+      "segundos"
+    );
 
+    if (elapsedSeconds < 2.5) {
       toast.error(
         lang === "es"
           ? "Espera un momento"
@@ -270,8 +253,8 @@ export function ContactForm() {
         {
           description:
             lang === "es"
-              ? "El formulario fue enviado demasiado rápido. Intenta nuevamente."
-              : "The form was submitted too quickly. Please try again.",
+              ? "Espera unos segundos antes de enviar el formulario."
+              : "Please wait a few seconds before submitting the form.",
         }
       );
 
@@ -279,10 +262,14 @@ export function ContactForm() {
     }
 
     // ====================================================
-    // VALIDACIÓN
+    // VALIDAR
     // ====================================================
 
     if (!validate()) {
+      console.warn(
+        "[Contact] Formulario inválido"
+      );
+
       toast.error(
         t.contact.toastTitle,
         {
@@ -294,106 +281,139 @@ export function ContactForm() {
       return;
     }
 
+    // ====================================================
+    // LLAMAR SERVER ACTION
+    // ====================================================
+
     setLoading(true);
 
     try {
-      const {
-        website_hp,
-        ...payload
-      } = form;
-
       console.log(
-        "[Contact] Enviando formulario..."
+        "[Contact] 📤 Ejecutando processContact...",
+        {
+          nombre: form.nombre,
+          correo: form.correo,
+          telefono: form.telefono,
+          asunto: form.asunto,
+        }
       );
 
       const result =
         await processContact({
-          form: payload,
+          form: {
+            nombre:
+              form.nombre.trim(),
+
+            correo:
+              form.correo.trim(),
+
+            telefono:
+              form.telefono.trim(),
+
+            asunto:
+              form.asunto.trim(),
+
+            mensaje:
+              form.mensaje.trim(),
+          },
+
           lang,
         });
 
       console.log(
-        "[Contact] Resultado processContact:",
+        "[Contact] 📥 Respuesta del servidor:",
         result
       );
 
-      if (
-        result.success
-      ) {
-        console.log(
-          "[Contact] ✅ Envío completado:",
-          {
-            clientEmailId:
-              result.clientEmailId,
-            adminEmailId:
-              result.adminEmailId,
-          }
-        );
+      // ==================================================
+      // ERROR
+      // ==================================================
 
-        setSent(true);
-
-        toast.success(
-          t.contact.sentToastTitle,
-          {
-            description:
-              t.contact.sentToastDesc,
-          }
-        );
-
-        mountTimeRef.current =
-          Date.now();
-      } else {
+      if (!result.success) {
         console.error(
-          "[Contact] ❌ Error:",
+          "[Contact] ❌ El servidor reportó error:",
           result.error
         );
 
         toast.error(
           lang === "es"
-            ? "Error al enviar"
-            : "Send error",
+            ? "No fue posible enviar el mensaje"
+            : "Unable to send message",
           {
             description:
               result.error ||
               (
                 lang === "es"
-                  ? "No fue posible enviar el mensaje."
-                  : "The message could not be sent."
+                  ? "Ocurrió un error desconocido."
+                  : "An unknown error occurred."
               ),
           }
         );
+
+        return;
       }
-    } catch (
-      error
-    ) {
+
+      // ==================================================
+      // ÉXITO
+      // ==================================================
+
+      console.log(
+        "[Contact] ✅ Correos aceptados por Resend",
+        {
+          clientEmailId:
+            result.clientEmailId,
+
+          adminEmailId:
+            result.adminEmailId,
+        }
+      );
+
+      setSent(true);
+
+      toast.success(
+        t.contact.sentToastTitle,
+        {
+          description:
+            t.contact.sentToastDesc,
+        }
+      );
+
+      mountTimeRef.current =
+        Date.now();
+
+    } catch (error) {
       console.error(
-        "[Contact] Error inesperado:",
+        "[Contact] ❌ Error ejecutando processContact:",
         error
       );
+
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Error desconocido";
 
       toast.error(
         lang === "es"
           ? "Error al enviar"
           : "Send error",
         {
-          description:
-            lang === "es"
-              ? "Ocurrió un error inesperado al enviar el formulario."
-              : "An unexpected error occurred while sending the form.",
+          description: message,
         }
       );
+
     } finally {
       setLoading(false);
     }
   };
 
   // ======================================================
-  // ESTADO ENVIADO
+  // MENSAJE DE ÉXITO
   // ======================================================
 
   if (sent) {
     return (
       <div className="flex min-h-[500px] flex-col items-center justify-center rounded-[2.5rem] border border-slate-100 bg-white p-12 text-center shadow-xl">
+
         <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-green-50">
           <CheckCircle2 className="h-12 w-12 text-green-500" />
         </div>
@@ -420,6 +440,7 @@ export function ContactForm() {
         >
           {t.contact.sendAnother}
         </button>
+
       </div>
     );
   }
@@ -441,46 +462,22 @@ export function ContactForm() {
       noValidate
       className="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-xl sm:p-12"
     >
-      <div className="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-indigo-500 to-blue-500" />
 
-      {/* HONEYPOT */}
-      <div
-        className="absolute -left-[9999px] top-0"
-        aria-hidden="true"
-      >
-        <input
-          type="text"
-          name="website_hp"
-          autoComplete="off"
-          tabIndex={-1}
-          value={
-            form.website_hp
-          }
-          onChange={(e) =>
-            update(
-              "website_hp",
-              e.target.value
-            )
-          }
-        />
-      </div>
+      <div className="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-indigo-500 to-blue-500" />
 
       <div className="grid gap-6 sm:grid-cols-2">
 
         {/* NOMBRE */}
         <div className="sm:col-span-2">
+
           <label className="mb-2 ml-1 block text-sm font-bold text-slate-700">
             {t.contact.fullName}
           </label>
 
           <input
             type="text"
-            className={
-              inputBaseClasses
-            }
-            value={
-              form.nombre
-            }
+            className={inputBaseClasses}
+            value={form.nombre}
             onChange={(e) =>
               update(
                 "nombre",
@@ -488,34 +485,29 @@ export function ContactForm() {
               )
             }
             placeholder={
-              t.contact
-                .namePlaceholder
+              t.contact.namePlaceholder
             }
           />
 
           {errors.nombre && (
             <p className="ml-1 mt-2 text-xs font-semibold text-red-500">
-              {
-                errors.nombre
-              }
+              {errors.nombre}
             </p>
           )}
+
         </div>
 
         {/* CORREO */}
         <div>
+
           <label className="mb-2 ml-1 block text-sm font-bold text-slate-700">
             {t.contact.email}
           </label>
 
           <input
             type="email"
-            className={
-              inputBaseClasses
-            }
-            value={
-              form.correo
-            }
+            className={inputBaseClasses}
+            value={form.correo}
             onChange={(e) =>
               update(
                 "correo",
@@ -523,67 +515,57 @@ export function ContactForm() {
               )
             }
             placeholder={
-              t.contact
-                .emailPlaceholder
+              t.contact.emailPlaceholder
             }
           />
 
           {errors.correo && (
             <p className="ml-1 mt-2 text-xs font-semibold text-red-500">
-              {
-                errors.correo
-              }
+              {errors.correo}
             </p>
           )}
+
         </div>
 
         {/* TELÉFONO */}
         <div>
+
           <label className="mb-2 ml-1 block text-sm font-bold text-slate-700">
             {t.contact.phone}
           </label>
 
           <input
             type="tel"
-            className={
-              inputBaseClasses
-            }
-            value={
-              form.telefono
-            }
+            className={inputBaseClasses}
+            value={form.telefono}
             onChange={
               handlePhoneChange
             }
             placeholder={
-              t.contact
-                .phonePlaceholder
+              t.contact.phonePlaceholder
             }
             maxLength={10}
           />
 
           {errors.telefono && (
             <p className="ml-1 mt-2 text-xs font-semibold text-red-500">
-              {
-                errors.telefono
-              }
+              {errors.telefono}
             </p>
           )}
+
         </div>
 
         {/* ASUNTO */}
         <div className="sm:col-span-2">
+
           <label className="mb-2 ml-1 block text-sm font-bold text-slate-700">
             {t.contact.subject}
           </label>
 
           <input
             type="text"
-            className={
-              inputBaseClasses
-            }
-            value={
-              form.asunto
-            }
+            className={inputBaseClasses}
+            value={form.asunto}
             onChange={(e) =>
               update(
                 "asunto",
@@ -591,23 +573,22 @@ export function ContactForm() {
               )
             }
             placeholder={
-              t.contact
-                .subjectPlaceholder
+              t.contact.subjectPlaceholder
             }
           />
+
         </div>
 
         {/* MENSAJE */}
         <div className="sm:col-span-2">
+
           <label className="mb-2 ml-1 block text-sm font-bold text-slate-700">
             {t.contact.message}
           </label>
 
           <textarea
             className={`${inputBaseClasses} min-h-[150px] resize-none`}
-            value={
-              form.mensaje
-            }
+            value={form.mensaje}
             onChange={(e) =>
               update(
                 "mensaje",
@@ -615,19 +596,18 @@ export function ContactForm() {
               )
             }
             placeholder={
-              t.contact
-                .msgPlaceholder
+              t.contact.msgPlaceholder
             }
           />
 
           {errors.mensaje && (
             <p className="ml-1 mt-2 text-xs font-semibold text-red-500">
-              {
-                errors.mensaje
-              }
+              {errors.mensaje}
             </p>
           )}
+
         </div>
+
       </div>
 
       {/* BOTÓN */}
@@ -636,6 +616,7 @@ export function ContactForm() {
         disabled={loading}
         className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-indigo-600 py-5 font-bold text-white shadow-lg shadow-indigo-200 transition-all hover:scale-[1.01] hover:bg-indigo-700 hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
       >
+
         {loading ? (
           <>
             <Loader2 className="h-5 w-5 animate-spin" />
@@ -647,7 +628,9 @@ export function ContactForm() {
             <Send className="ml-1 h-5 w-5" />
           </>
         )}
+
       </button>
+
     </form>
   );
 }
